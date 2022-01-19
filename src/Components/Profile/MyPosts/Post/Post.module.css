@@ -1,0 +1,13 @@
+.post {
+    padding-top: 15px;
+    padding-left: 15px;
+    background-color: cornflowerblue;
+    max-width: 20%;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+}
+.post img {
+    max-width: 50px;
+    border-radius: 10px;
+}
