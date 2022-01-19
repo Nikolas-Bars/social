@@ -1,3 +1,40 @@
-ul li {
-  list-style-type: georgian;
+
+.app-wrapper{
+  width: 1200px;
+  margin: 10px auto 0 auto;
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 5px;
+  grid-template-areas:
+          'h h'
+          'n k'
+;
 }
+
+.header{
+  background-color: cornflowerblue;
+  grid-area: h;
+  border-top-right-radius: 20px ;
+  border-top-left-radius: 20px ;
+  padding: 10px;
+}
+.nav{
+  padding: 10px;
+  background-color: lightblue;
+  grid-area: n;
+  border-bottom-left-radius: 20px ;
+}
+.content{
+  padding: 10px;
+  background-color: yellowgreen;
+  grid-area: k;
+  border-bottom-right-radius: 20px;
+}
+.img-content img{
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+
