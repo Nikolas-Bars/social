@@ -1,0 +1,7 @@
+.content{
+    padding: 10px;
+    background-color: yellowgreen;
+    grid-area: k;
+    border-bottom-right-radius: 20px;
+}
+
