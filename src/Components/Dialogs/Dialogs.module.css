@@ -1,7 +1,35 @@
-.content{
+.dialogs{
     padding: 10px;
     background-color: yellowgreen;
-    grid-area: k;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
     border-bottom-right-radius: 20px;
 }
 
+
+
+.dialogsItems{
+    padding: 20px;
+}
+
+.dialogsItems .dialog{
+    font-family: "Yu Gothic UI Semilight";
+    border: 2px solid dimgray;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+
+
+
+.messages{
+    padding: 20px;
+
+}
+
+.messages .message{
+    font-family: "Yu Gothic UI Semilight";
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
