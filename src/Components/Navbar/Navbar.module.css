@@ -1,4 +1,4 @@
-.nav{
+.navbar{
     padding: 10px;
     background-color: lightblue;
     grid-area: n;
@@ -8,6 +8,29 @@
 .i1 {
     color: palevioletred;
 }
-.i2{
-    border: 1px solid black;
+
+.nav{
+    border: 2px solid gray;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+
 }
+a{
+    text-decoration: none;
+    font-weight: bold;
+    font-family: "Sitka Banner";
+}
+
+.a1{
+    text-decoration: none;
+    font-weight: bold;
+    font-family: "Source Code Pro ExtraLight";
+}
+
+.a2{
+    text-decoration: none;
+    font-weight: bold;
+    font-family: Gadugi;
+}
+
