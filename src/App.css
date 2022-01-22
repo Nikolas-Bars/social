@@ -1,5 +1,6 @@
 
 .app-wrapper{
+
   width: 1200px;
   margin: 10px auto 0 auto;
   display: grid;
@@ -10,6 +11,13 @@
           'h h'
           'n k'
 ;
+}
+
+.app-wrapper-content{
+  padding: 10px;
+  background-color: yellowgreen;
+  grid-area: k;
+  border-bottom-right-radius: 20px;
 }
 
 
