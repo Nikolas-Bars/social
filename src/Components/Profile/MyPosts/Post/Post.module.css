@@ -2,12 +2,28 @@
     padding-top: 15px;
     padding-left: 15px;
     background-color: cornflowerblue;
-    max-width: 20%;
+    max-width: 40%;
     padding-bottom: 15px;
     margin-bottom: 15px;
     border-radius: 20px;
+    border: 1px solid black;
 }
 .post img {
     max-width: 50px;
     border-radius: 10px;
+}
+.text{
+    max-width: 80%;
+    background-color: lightgoldenrodyellow;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.likesCount{
+    border-radius: 20px;
+    background-color: yellowgreen;
+    padding: 7px;
+    text-align: right;
+
 }

@@ -2,12 +2,17 @@ import React from 'react'
 import fox from '../../../../img/fox.jpg'
 import s from "./Post.module.css"
 
-const Post =()=>{
+type postPropsType ={
+    message: string,
+    likesCount: number
+}
+
+const Post =(props: postPropsType)=>{
     return (<div className={s.post}>
         <div>
-            <img src={fox}/> Post
+            <img src={fox}/> <div className={s.text}>{props.message}</div>
         </div>
-        <span>like</span>
+        <span className={s.likesCount}>likes: {props.likesCount}</span>
     </div>
     )
 }

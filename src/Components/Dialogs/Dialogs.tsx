@@ -16,19 +16,19 @@ let messagesData = [
     {message: 'I love to eat!'},
 ]
 
-let fuck = dialogsData.map(el => <div className={s.dialog}><NavLink to={'/dialogs/' + el.id}>{el.name}</NavLink></div>)
-let fuckingMessage = messagesData.map(el => <div className={s.message}>{el.message}</div>)
+let dialogsElement = dialogsData.map(el => <div className={s.dialog}><NavLink to={'/dialogs/' + el.id}>{el.name}</NavLink></div>)
+let messagesElement = messagesData.map(el => <div className={s.message}>{el.message}</div>)
 
 
 const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {fuck}
+                {dialogsElement}
               </div>
 
             <div className={s.messages}>
-                {fuckingMessage}
+                {messagesElement}
             </div>
 
         </div>
