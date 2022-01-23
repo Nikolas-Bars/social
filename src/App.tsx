@@ -7,23 +7,23 @@ import Profile from "./Components/Profile/Profile";
 import Dialogs from "./Components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
-function App() {
+
+
+function App(props: any) {
     return (
         <BrowserRouter>
 
             <div className={"app-wrapper"}>
                 <Header/>
                 <Navbar/>
-
                 <div className={'app-wrapper-content'}>
+
                     <Routes>
-
-                        <Route path={'/profile/*'} element={<Profile/>}/>
-                        <Route path={'/dialogs/*'} element={<Dialogs/>}/>
-
+                        <Route path={'/profile/*'} element={<Profile posts={props.posts}/>}/>
+                        <Route path={'/dialogs/*'} element={<Dialogs  messagesData={props.messagesData} dialogsData={props.dialogsData}/>}/>
                     </Routes>
-                </div>
 
+                </div>
             </div>
         </BrowserRouter>
     );

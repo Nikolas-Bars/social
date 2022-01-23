@@ -5,12 +5,15 @@ import Post from "./MyPosts/Post/Post";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
+type ProfilePropsType = {
+    posts: Array<any>
+}
 
-const Profile =()=>{
+const Profile =(props:ProfilePropsType)=>{
     return(
         <div>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts posts={props.posts}/>
         </div>
     )
 }
