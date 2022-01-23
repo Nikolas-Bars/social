@@ -20,7 +20,7 @@ function App(props: any) {
 
                     <Routes>
                         <Route path={'/profile/*'} element={<Profile posts={props.posts}/>}/>
-                        <Route path={'/dialogs/*'} element={<Dialogs  messagesData={props.messagesData} dialogsData={props.dialogsData}/>}/>
+                        <Route path={'/dialogs/*'} element={<Dialogs  messages={props.messages} dialogs={props.dialogs}/>}/>
                     </Routes>
 
                 </div>

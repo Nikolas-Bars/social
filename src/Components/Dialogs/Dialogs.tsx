@@ -5,14 +5,14 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
 type DialogsPropsType = {
-    messagesData: Array<any>,
-    dialogsData: Array<any>
+    messages: Array<any>,
+    dialogs: Array<any>
 }
 
 const Dialogs = (props: DialogsPropsType) => {
 
-    let dialogsElement = props.dialogsData.map(el => <div className={s.dialog} key={el.id}><NavLink to={'/dialogs/' + el.id}><DialogItem name={el.name}/></NavLink></div>)
-    let messagesElement = props.messagesData.map(el => <div className={s.message} key={el.id}><Message message={el.message}/></div>)
+    let dialogsElement = props.dialogs.map(el => <div className={s.dialog} key={el.id}><NavLink to={'/dialogs/' + el.id}><DialogItem name={el.name}/></NavLink></div>)
+    let messagesElement = props.messages.map(el => <div className={s.message} key={el.id}><Message message={el.message}/></div>)
 
     return (
         <div className={s.dialogs}>
