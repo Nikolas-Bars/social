@@ -19,8 +19,8 @@ function App(props: any) {
                 <div className={'app-wrapper-content'}>
 
                     <Routes>
-                        <Route path={'/profile/*'} element={<Profile posts={props.posts}/>}/>
-                        <Route path={'/dialogs/*'} element={<Dialogs  messages={props.messages} dialogs={props.dialogs}/>}/>
+                        <Route path={'/profile/*'} element={<Profile state={props.state.profilePage}/>}/>
+                        <Route path={'/dialogs/*'} element={<Dialogs  state={props.state.dialogsPage} />}/>
                     </Routes>
 
                 </div>

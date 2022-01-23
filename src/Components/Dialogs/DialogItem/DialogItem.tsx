@@ -4,13 +4,16 @@ import {NavLink} from "react-router-dom";
 
 
 type DialogsItemPropsType = {
-    name: string
+    name: string,
+    img: any
 }
 
 const DialogItem = (props:DialogsItemPropsType) => {
+    debugger
     return (
-        <div>
-            {props.name}
+        <div className={s.dialogsImg}>
+            <img src={props.img} /><span className={s.dialog}>{props.name}</span>
+
         </div>
     )
 }
