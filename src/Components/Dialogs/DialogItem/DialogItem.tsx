@@ -9,7 +9,7 @@ type DialogsItemPropsType = {
 }
 
 const DialogItem = (props:DialogsItemPropsType) => {
-    debugger
+
     return (
         <div className={s.dialogsImg}>
             <img src={props.img} /><span className={s.dialog}>{props.name}</span>

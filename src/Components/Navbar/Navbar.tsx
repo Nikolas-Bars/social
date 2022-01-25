@@ -12,9 +12,7 @@ type NavBarPropsType = {
 }
 
 const Navbar = (props: NavBarPropsType) => {
-    debugger
-    let friendsElement = props.state.friends.map(el => <NavBarFriends id={el.id} img={el.img} key={el.id}/>)
-debugger
+        let friendsElement = props.state.friends.map(el => <NavBarFriends id={el.id} img={el.img} key={el.id}/>)
     return (
         <nav className={s.navbar}>
             <div className={s.nav}>

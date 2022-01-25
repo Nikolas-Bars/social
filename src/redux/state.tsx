@@ -18,7 +18,7 @@ let state = {
             {message: 'Hi bro!', id: '2', messageRight: true},
             {message: 'How are you?', id: '3', messageRight: false},
             {message: 'I`m fine.', id: '4', messageRight: true},
-            {message: 'It`s good. ', id: '4', messageRight: false}
+            {message: 'It`s good. ', id: '5', messageRight: false}
         ],
 
          dialogs: [
