@@ -9,7 +9,7 @@ const Message =(props: MessagePropsType)=>{
 
 
     return(
-           <span className={s.messageText}>{props.message}</span>
+           <div className={s.messageText}>{props.message}</div>
     )
 }
 

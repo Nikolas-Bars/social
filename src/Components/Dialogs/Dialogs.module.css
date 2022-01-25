@@ -1,7 +1,8 @@
 .dialogs{
+
     padding: 10px;
     display: grid;
-    grid-template-columns: 4fr 10fr;
+    grid-template-columns: 300px 500px;
     border-bottom-right-radius: 20px;
 }
 
@@ -21,21 +22,24 @@
 
 
 
-
-.messages{
-    padding: 20px;
-
-}
-
-.messages .message{
-    display: block;
+.messageRight{
+    text-align: right;
     max-width: 200px;
     font-family: "Yu Gothic UI Semilight";
     margin-top: 10px;
-    margin-bottom: 54px;
+    margin-bottom: 14px;
+}
+
+.messageLeft{
+    text-align: left;
+    max-width: 200px;
+    font-family: "Yu Gothic UI Semilight";
+    margin-top: 10px;
+    margin-bottom: 14px;
 
 
 }
+
 .dialogsImg img{
     margin: 5px;
     vertical-align:middle;
@@ -48,13 +52,16 @@
 }
 
 .messageText{
+    display: inline-block;
     border: 1px solid gray;
-    border-radius: 20px;
-    padding: 7px;
+    border-radius: 30px;
+    padding: 12px;
     background-color: lightgoldenrodyellow;
     vertical-align:middle;
-
 }
+
+
+
 /*    border: 1px solid gray;
     border-radius: 20px;
     padding: 7px;

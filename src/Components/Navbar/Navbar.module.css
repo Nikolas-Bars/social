@@ -2,6 +2,7 @@
     padding: 10px;
     background-color: lightblue;
     grid-area: n;
+    min-width: 180px;
     border-bottom-left-radius: 20px ;
 }
 
@@ -34,3 +35,23 @@ a{
     font-family: Gadugi;
 }
 
+.friends {
+    margin-top: 50px;
+    font-family: "Source Code Pro ExtraLight";
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+
+}
+
+.friendsImg{
+    padding-top: 30px;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.friendsImg img{
+    max-width: 45px;
+    margin-right: 10px;
+    border-radius: 30px;
+}

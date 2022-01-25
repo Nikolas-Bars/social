@@ -12,9 +12,9 @@ type DialogsPropsType = {
 }
 
 const Dialogs = (props: DialogsPropsType) => {
-debugger
+
     let dialogsElement = props.state.dialogs.map(el => <div key={el.id}><NavLink to={'/dialogs/' + el.id}><DialogItem name={el.name} img={el.img}/></NavLink></div>)
-    let messagesElement = props.state.messages.map(el => <div className={s.message} key={el.id}><Message  message={el.message} /></div>)
+    let messagesElement = props.state.messages.map(el => <div className={el.messageRight ? s.messageRight : s.messageLeft} key={el.id}><Message  message={el.message} /></div>)
 
     return (
         <div className={s.dialogs}>
@@ -22,7 +22,7 @@ debugger
                 {dialogsElement}
             </div>
 
-            <div className={s.messages}>
+            <div className={s.messageBlockDiv}>
                 {messagesElement}
             </div>
         </div>
