@@ -4,17 +4,22 @@ import s from './MyPost.module.css'
 
 type MyPostsPropsType ={
     posts: Array<any>
+    addPost: any
 }
 
 
 
 const MyPosts = (props: MyPostsPropsType) => {
+
     let refElement: any = React.createRef()
+
     const addPost =()=>{
         let text = refElement.current.value;
-        alert(text)
+        props.addPost(text)
     }
+
     let postsElement = props.posts.map(post => <Post message={post.message} likesCount={post.likesCount} key={post.id}/>)
+
     return (
         <div className={s.postsBlock}>
             <h3>My Posts</h3>
