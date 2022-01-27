@@ -6,15 +6,17 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 type ProfilePropsType = {
-    state: any;
+    profilePage: any;
     addPost: any
+    upText: any
+
 }
 
 const Profile =(props:ProfilePropsType)=>{
     return(
         <div>
             <ProfileInfo/>
-            <MyPosts addPost={props.addPost} posts={props.state.posts}/>
+            <MyPosts addPost={props.addPost} profilePage={props.profilePage} upText={props.upText}/>
         </div>
     )
 }
