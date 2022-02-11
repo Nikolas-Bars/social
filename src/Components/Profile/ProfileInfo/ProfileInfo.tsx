@@ -1,5 +1,5 @@
 import s from "./ProfileInfo.module.css";
-import Rica from "../../../img/Rica.jpg";
+import Rica from "../../../img/top.png";
 import React from "react";
 
 

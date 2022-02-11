@@ -3,9 +3,59 @@ import icon3 from '../img/iconsForDialogs/icon3.jpg'
 import icon4 from '../img/iconsForDialogs/icon4.jpg'
 import icon5 from '../img/iconsForDialogs/icon5.jpg'
 
-let rerenderEntireTree =(state: any)=>{} // переименуем в callSubscriber
+let rerenderEntireTree =(state: typeof store.getState)=>{
 
-let store = {
+} // переименуем в callSubscriber
+
+
+type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+type MessagesType = {
+    message: string
+    id: string
+    messageRight: boolean
+}
+type DialogsType = {
+    name: string
+    id: string
+    img: string
+}
+type FriendsType = {
+    img: string
+    id: string
+}
+type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+}
+type DialogsPageType = {
+    messages: Array<MessagesType>
+    dialogs: Array<DialogsType>
+}
+type SideBarFriendsType = {
+    friends: Array<FriendsType>
+}
+export type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+    sideBarFriends: SideBarFriendsType
+
+}
+export type StoreType = {
+    _state: StateType,
+    _callSubscriber: (state: StateType) => void
+    subscribe: (observer: ObserverType) => void
+    getState: ()=> StateType
+    addPost:()=> void
+    upText: (text: string)=> void
+}
+type ObserverType = (state: StateType) => void
+
+let store: StoreType = {
+
     _state: {
         profilePage: {
             posts: [
@@ -41,6 +91,17 @@ let store = {
             ]
         }
     },
+
+    _callSubscriber(state){
+        console.log('cat')
+    },
+    subscribe(observer){
+        this._callSubscriber = observer
+    },
+    getState(){
+        return this._state
+    },
+
     addPost(){
         let newPost = {
             id: this._state.profilePage.posts.length + 1,
@@ -55,15 +116,6 @@ let store = {
         this._state.profilePage.newPostText = text;
         this._callSubscriber(this._state)
     },
-    _callSubscriber(state: any){
-        console.log('cat')
-    },
-    subscribe(observer: any){
-        this._callSubscriber = observer
-    },
-    getState(){
-        return this._state
-    }
 
 
 }

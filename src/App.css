@@ -15,7 +15,7 @@
 
 .app-wrapper-content{
   padding: 10px;
-  background-color: yellowgreen;
+  background-image: url("./img/bg.jpg");
   grid-area: k;
   border-bottom-right-radius: 20px;
 }
