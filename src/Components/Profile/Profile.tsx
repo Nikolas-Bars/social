@@ -16,7 +16,7 @@ const Profile =(props:ProfilePropsType)=>{
     return(
         <div>
             <ProfileInfo/>
-            <MyPosts addPost={props.addPost} profilePage={props.profilePage} upText={props.upText}/>
+            <MyPosts  addPost={props.addPost} profilePage={props.profilePage} upText={props.upText}/>
         </div>
     )
 }

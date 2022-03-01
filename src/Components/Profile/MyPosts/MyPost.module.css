@@ -7,3 +7,16 @@
     padding: 10px;
 }
 
+
+.textareaa textarea {
+    border-radius: 40px;
+    padding: 10px;
+    background-color: lightgoldenrodyellow;
+}
+.buttonPost button{
+    border-radius: 40px;
+    padding: 10px;
+    font-family: "Sitka Banner";
+    font-size: 15px;
+    background-color: lightgoldenrodyellow;
+}

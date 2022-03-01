@@ -1,34 +1,37 @@
-import React from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import Post from "./Post/Post";
 import s from './MyPost.module.css'
+import {PostType} from "../../../redux/state";
 
 type MyPostsPropsType ={
     profilePage: {
-        posts: Array<any>
+        posts: Array<PostType>
         newPostText: string
 
     }
-    addPost: any
-    upText: any
+    addPost: ()=>void
+    upText: (text: string)=>void
 }
 
 
 
 const MyPosts = (props: MyPostsPropsType) => {
 
-    let newPostElement: any = React.createRef()
 
     const addPost =()=>{
        props.addPost()
     }
 
-    const onPostChange =()=>{
-        let text = newPostElement.current.value;
+    const onPostChange =(event: ChangeEvent<HTMLTextAreaElement>)=>{
+        let text = event.currentTarget.value;
         props.upText(text)
     }
 
-
-
+    const onKeyPressEnter = (event: KeyboardEvent<HTMLTextAreaElement>) =>{
+        if(event.code === "Enter"){
+        addPost()
+        }
+    }
 
     let postsElement = props.profilePage.posts.map(post => <Post message={post.message} likesCount={post.likesCount} key={post.id}/>)
 
@@ -36,10 +39,10 @@ const MyPosts = (props: MyPostsPropsType) => {
         <div className={s.postsBlock}>
             <h3>My Posts</h3>
             <div className={s.myposts}>
-                <div>
-                    <textarea ref={newPostElement} onChange={onPostChange} value={props.profilePage.newPostText}></textarea>
+                <div className={s.textareaa}>
+                    <textarea onKeyPress={onKeyPressEnter} onChange={onPostChange} value={props.profilePage.newPostText} ></textarea>
                 </div>
-                <div>
+                <div className={s.buttonPost}>
                     <button onClick={addPost}>Добавить пост</button>
                 </div>
             </div>
@@ -47,7 +50,6 @@ const MyPosts = (props: MyPostsPropsType) => {
                 {postsElement.reverse()}
             </div>
         </div>
-
     )
 }
 

@@ -8,7 +8,7 @@ let rerenderEntireTree =(state: typeof store.getState)=>{
 } // переименуем в callSubscriber
 
 
-type PostType = {
+export type PostType = {
     id: number
     message: string
     likesCount: number
