@@ -10,8 +10,9 @@ import {StateType} from "./redux/state";
 
 type AppPropsType = {
     state: StateType
-    addPost: ()=>void
-    upText: (text: string)=> void
+/*    addPost: ()=>void
+    upText: (text: string)=> void*/
+    dispatch: any
 }
 
 const App = (props: AppPropsType) => {
@@ -19,9 +20,9 @@ const App = (props: AppPropsType) => {
             <div className={"app-wrapper"}>
                 <Header/>
                 <Navbar state={props.state.sideBarFriends}/>
-                <div className={'app--wrapper-content'}>
+                <div className={'app-wrapper-content'}>
                     <Routes>
-                        <Route path={'*'} element={<Profile  addPost={props.addPost} profilePage={props.state.profilePage} upText={props.upText}/> }/>
+                        <Route path={'*'} element={<Profile dispatch={props.dispatch}  profilePage={props.state.profilePage} /> }/>
                         <Route path={'/dialogs/*'} element={<Dialogs  state={props.state.dialogsPage} />}/>
                     </Routes>
                 </div>

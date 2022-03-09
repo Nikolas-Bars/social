@@ -7,8 +7,9 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 type ProfilePropsType = {
     profilePage: any;
-    addPost: any
-    upText: any
+/*    addPost: any
+    upText: any*/
+    dispatch: any
 
 }
 
@@ -16,7 +17,7 @@ const Profile =(props:ProfilePropsType)=>{
     return(
         <div>
             <ProfileInfo/>
-            <MyPosts  addPost={props.addPost} profilePage={props.profilePage} upText={props.upText}/>
+            <MyPosts   profilePage={props.profilePage} dispatch={props.dispatch}/>
         </div>
     )
 }

@@ -49,8 +49,9 @@ export type StoreType = {
     _callSubscriber: (state: StateType) => void
     subscribe: (observer: ObserverType) => void
     getState: ()=> StateType
-    addPost:()=> void
-    upText: (text: string)=> void
+/*    addPost:()=> void
+    upText: (text: string)=> void*/
+    dispatch: any
 }
 type ObserverType = (state: StateType) => void
 
@@ -102,7 +103,7 @@ let store: StoreType = {
         return this._state
     },
 
-    addPost(){
+/*    addPost(){
         let newPost = {
             id: this._state.profilePage.posts.length + 1,
             message: this._state.profilePage.newPostText,
@@ -111,13 +112,28 @@ let store: StoreType = {
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newPostText = "";
         this._callSubscriber(this._state)
-    },
-    upText(text: string){
+    },*/
+/*    upText(text: string){
         this._state.profilePage.newPostText = text;
         this._callSubscriber(this._state)
-    },
+    },*/
 
-
+    dispatch(action: any){
+        if(action.type === 'ADD-POST'){
+            let newPost = {
+                id: this._state.profilePage.posts.length + 1,
+                message: this._state.profilePage.newPostText,
+                likesCount: 14
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = "";
+            this._callSubscriber(this._state)
+        }else if(action.type === 'UPDATE-TEXT'){
+            debugger
+            this._state.profilePage.newPostText = action.text;
+            this._callSubscriber(this._state)
+        }
+    }
 }
 
 export default store

@@ -9,8 +9,9 @@ type MyPostsPropsType ={
         newPostText: string
 
     }
-    addPost: ()=>void
-    upText: (text: string)=>void
+/*    addPost: ()=>void
+    upText: (text: string)=>void*/
+    dispatch: any
 }
 
 
@@ -19,12 +20,14 @@ const MyPosts = (props: MyPostsPropsType) => {
 
 
     const addPost =()=>{
-       props.addPost()
+        if(props.profilePage.newPostText.trim() !== ''){
+       props.dispatch({type: 'ADD-POST'})
+        }
     }
 
     const onPostChange =(event: ChangeEvent<HTMLTextAreaElement>)=>{
         let text = event.currentTarget.value;
-        props.upText(text)
+        props.dispatch({type: 'UPDATE-TEXT', text: text})
     }
 
     const onKeyPressEnter = (event: KeyboardEvent<HTMLTextAreaElement>) =>{
