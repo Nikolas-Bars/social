@@ -2,18 +2,13 @@ import icon2 from '../img/iconsForDialogs/icon2.jpg'
 import icon3 from '../img/iconsForDialogs/icon3.jpg'
 import icon4 from '../img/iconsForDialogs/icon4.jpg'
 import icon5 from '../img/iconsForDialogs/icon5.jpg'
+import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+import dialogsReducer, {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
-let rerenderEntireTree =(state: typeof store.getState)=>{
+let rerenderEntireTree = (state: typeof store.getState) => {
 
 } // переименуем в callSubscriber
-
-const ADD_POST = "ADD-POST"
-const UPDATE_TEXT = "UPDATE-TEXT"
-
-
-
-
-
 
 
 
@@ -40,11 +35,12 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
-type DialogsPageType = {
+export type DialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
+    newMessageText: string
 }
-type SideBarFriendsType = {
+export type SideBarFriendsType = {
     friends: Array<FriendsType>
 }
 export type StateType = {
@@ -57,10 +53,8 @@ export type StoreType = {
     _state: StateType,
     _callSubscriber: (state: StateType) => void
     subscribe: (observer: ObserverType) => void
-    getState: ()=> StateType
-/*    addPost:()=> void
-    upText: (text: string)=> void*/
-    dispatch: (action: ActionTypes)=>void
+    getState: () => StateType
+    dispatch: (action: ActionTypes) => void
 }
 type ObserverType = (state: StateType) => void
 
@@ -86,6 +80,8 @@ let store: StoreType = {
                 {message: 'It`s good. ', id: '5', messageRight: false}
             ],
 
+            newMessageText: "your message...",
+
             dialogs: [
                 {name: 'Sasha', id: '1', img: icon2},
                 {name: 'Lena', id: '2', img: icon3},
@@ -102,33 +98,24 @@ let store: StoreType = {
         }
     },
 
-    _callSubscriber(state){
+    _callSubscriber(state) {
         console.log('cat')
     },
-    subscribe(observer){
+    subscribe(observer) {
         this._callSubscriber = observer
     },
-    getState(){
+    getState() {
         return this._state
     },
 
-/*    addPost(){
-        let newPost = {
-            id: this._state.profilePage.posts.length + 1,
-            message: this._state.profilePage.newPostText,
-            likesCount: 14
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = "";
-        this._callSubscriber(this._state)
-    },*/
-/*    upText(text: string){
-        this._state.profilePage.newPostText = text;
-        this._callSubscriber(this._state)
-    },*/
 
-    dispatch(action: any){
-        if(action.type === 'ADD-POST'){
+    dispatch(action: ActionTypes) {
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sideBarFriends = sidebarReducer(this._state.sideBarFriends, action)
+        this._callSubscriber(this._state)
+/*        if (action.type === 'ADD-POST') {
             let newPost = {
                 id: this._state.profilePage.posts.length + 1,
                 message: this._state.profilePage.newPostText,
@@ -137,32 +124,42 @@ let store: StoreType = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = "";
             this._callSubscriber(this._state)
-        }else if(action.type === "UPDATE-TEXT"){
-            debugger
+        } else if (action.type === "UPDATE-TEXT") {
             this._state.profilePage.newPostText = action.text;
             this._callSubscriber(this._state)
-        }
+        } else if (action.type === NEW_MESSAGE_TEXT) {
+            this._state.dialogsPage.newMessageText = action.newMessage
+            this._callSubscriber(this._state)
+        } else if (action.type === ADD_NEW_MESSAGE) {
+
+            this._state.dialogsPage.messages.push(
+                {
+                    message: this._state.dialogsPage.newMessageText,
+                    id: this._state.dialogsPage.messages.length.toString(),
+
+                    messageRight: !this._state.dialogsPage.messages[this._state.dialogsPage.messages.length - 1].messageRight
+                })
+            this._callSubscriber(this._state)
+        }*/
     }
 }
 
 
-
 //////////////////////////////////////
 
-export type ActionTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+export type ActionTypes =
+    ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof NewMessageTextActionCreator>
+    | ReturnType<typeof addNewMessageActionCreator>
 
 
-export let addPostActionCreator =() =>  ({type: ADD_POST})
 
-export let updateNewPostTextActionCreator =(text: string) =>({type: UPDATE_TEXT,text: text})
+
 
 //////////////////////////////////////
-
 
 
 export default store
-
-
 
 
 /*let state = {

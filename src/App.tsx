@@ -10,8 +10,6 @@ import {ActionTypes, StateType} from "./redux/state";
 
 type AppPropsType = {
     state: StateType
-/*    addPost: ()=>void
-    upText: (text: string)=> void*/
     dispatch: (action: ActionTypes)=>void
 }
 
@@ -23,7 +21,7 @@ const App = (props: AppPropsType) => {
                 <div className={'app-wrapper-content'}>
                     <Routes>
                         <Route path={'*'} element={<Profile dispatch={props.dispatch}  profilePage={props.state.profilePage} /> }/>
-                        <Route path={'/dialogs/*'} element={<Dialogs  state={props.state.dialogsPage} />}/>
+                        <Route path={'/dialogs/*'} element={<Dialogs dispatch={props.dispatch} state={props.state.dialogsPage} />}/>
                     </Routes>
                 </div>
             </div>

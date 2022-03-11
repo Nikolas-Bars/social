@@ -3,37 +3,42 @@ import s from './../Dialogs/Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsType, MessagesType} from "../../redux/state";
+import {
+    ActionTypes,
+
+    DialogsType,
+    MessagesType,
+
+} from "../../redux/state";
+import {addNewMessageActionCreator, NewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 
 type DialogsPropsType = {
     state: {
         dialogs: Array<DialogsType>,
         messages: Array<MessagesType>
+        newMessageText: string
     }
+    dispatch: (action: ActionTypes)=>void
 }
 
 
 
 const Dialogs = (props: DialogsPropsType) => {
 
-    let [text, setText] = useState('')
-
     let dialogsElement = props.state.dialogs.map(el => <div key={el.id}><NavLink to={'/dialogs/' + el.id}><DialogItem name={el.name} img={el.img}/></NavLink></div>)
     let messagesElement = props.state.messages.map(el => <div className={el.messageRight ? s.messageRight : s.messageLeft} key={el.id}><Message  message={el.message} /></div>)
 
     let onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>{
-        let newText = e.currentTarget.value
-        setText(newText)
-        console.log(text)
+        let text = e.currentTarget.value
+        props.dispatch(NewMessageTextActionCreator(text))
     }
 
     let onClickHandler =()=>{
-        debugger
-        if(text.trim() !== ''){
-        let newMessageObj = {message: text, id: (props.state.messages.length + 1).toString(), messageRight: props.state.messages[props.state.messages.length - 1].messageRight === false ? true : false}
-        props.state.messages.push(newMessageObj)
-        setText('')
-        }}
+        if(props.state.newMessageText.trim() !== ''){
+            props.dispatch(addNewMessageActionCreator())
+            props.dispatch(NewMessageTextActionCreator(''))
+        } }
+
 
     return (
         <div className={s.dialogs}>
@@ -44,7 +49,7 @@ const Dialogs = (props: DialogsPropsType) => {
             <div className={s.messageBlockDiv}>
                 {messagesElement}
             </div>
-            <input type={'input'} value={text} onChange={onChangeHandler} placeholder={'enter a new message...'} /><button onClick={onClickHandler}>SEND MESSAGE</button>
+            <input type={'input'} value={props.state.newMessageText} onChange={onChangeHandler} placeholder={'enter a new message...'} /><button onClick={onClickHandler}>SEND MESSAGE</button>
 
         </div>
     )
