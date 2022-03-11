@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import Post from "./Post/Post";
 import s from './MyPost.module.css'
-import {PostType} from "../../../redux/state";
+import {ActionTypes, addPostActionCreator, PostType, updateNewPostTextActionCreator} from "../../../redux/state";
 
 type MyPostsPropsType ={
     profilePage: {
@@ -11,7 +11,7 @@ type MyPostsPropsType ={
     }
 /*    addPost: ()=>void
     upText: (text: string)=>void*/
-    dispatch: any
+    dispatch: (action: ActionTypes)=> void
 }
 
 
@@ -21,13 +21,15 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     const addPost =()=>{
         if(props.profilePage.newPostText.trim() !== ''){
-       props.dispatch({type: 'ADD-POST'})
+            debugger
+       props.dispatch(addPostActionCreator())
+            debugger
         }
     }
 
     const onPostChange =(event: ChangeEvent<HTMLTextAreaElement>)=>{
         let text = event.currentTarget.value;
-        props.dispatch({type: 'UPDATE-TEXT', text: text})
+        props.dispatch(updateNewPostTextActionCreator(text))
     }
 
     const onKeyPressEnter = (event: KeyboardEvent<HTMLTextAreaElement>) =>{

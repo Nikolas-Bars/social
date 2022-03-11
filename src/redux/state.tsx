@@ -7,18 +7,27 @@ let rerenderEntireTree =(state: typeof store.getState)=>{
 
 } // переименуем в callSubscriber
 
+const ADD_POST = "ADD-POST"
+const UPDATE_TEXT = "UPDATE-TEXT"
+
+
+
+
+
+
+
 
 export type PostType = {
     id: number
     message: string
     likesCount: number
 }
-type MessagesType = {
+export type MessagesType = {
     message: string
     id: string
     messageRight: boolean
 }
-type DialogsType = {
+export type DialogsType = {
     name: string
     id: string
     img: string
@@ -27,7 +36,7 @@ type FriendsType = {
     img: string
     id: string
 }
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
@@ -51,7 +60,7 @@ export type StoreType = {
     getState: ()=> StateType
 /*    addPost:()=> void
     upText: (text: string)=> void*/
-    dispatch: any
+    dispatch: (action: ActionTypes)=>void
 }
 type ObserverType = (state: StateType) => void
 
@@ -128,7 +137,7 @@ let store: StoreType = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = "";
             this._callSubscriber(this._state)
-        }else if(action.type === 'UPDATE-TEXT'){
+        }else if(action.type === "UPDATE-TEXT"){
             debugger
             this._state.profilePage.newPostText = action.text;
             this._callSubscriber(this._state)
@@ -136,7 +145,24 @@ let store: StoreType = {
     }
 }
 
+
+
+//////////////////////////////////////
+
+export type ActionTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+
+
+export let addPostActionCreator =() =>  ({type: ADD_POST})
+
+export let updateNewPostTextActionCreator =(text: string) =>({type: UPDATE_TEXT,text: text})
+
+//////////////////////////////////////
+
+
+
 export default store
+
+
 
 
 /*let state = {

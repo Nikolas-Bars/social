@@ -6,6 +6,22 @@
     border-bottom-right-radius: 20px;
 }
 
+.dialogs input {
+    background-color: wheat;
+    border-radius: 30px ;
+    height: 40px;
+    padding: 10px;
+
+}
+
+.dialogs button{
+    border-radius: 40px;
+    padding: 10px;
+    font-family: "Sitka Banner";
+    font-size: 15px;
+    width: 150px;
+    background-color: lightgoldenrodyellow;
+}
 
 
 .dialogsItems{
