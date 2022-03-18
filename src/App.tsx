@@ -6,11 +6,13 @@ import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
 import Dialogs from "./Components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
-import {ActionTypes, StateType} from "./redux/store";
+import {ActionTypes, DialogsPageType, ProfilePageType, SideBarFriendsType, StateType, StoreType} from "./redux/store";
+import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
     state: StateType
     dispatch: (action: ActionTypes)=>void
+    store: any
 }
 
 const App = (props: AppPropsType) => {
@@ -20,8 +22,8 @@ const App = (props: AppPropsType) => {
                 <Navbar state={props.state.sideBarFriends}/>
                 <div className={'app-wrapper-content'}>
                     <Routes>
-                        <Route path={'*'} element={<Profile dispatch={props.dispatch}  profilePage={props.state.profilePage} /> }/>
-                        <Route path={'/dialogs/*'} element={<Dialogs dispatch={props.dispatch} state={props.state.dialogsPage} />}/>
+                        <Route path={'*'} element={<Profile store={props.store} dispatch={props.dispatch}  profilePage={props.state.profilePage} /> }/>
+                        <Route path={'/dialogs/*'} element={<DialogsContainer store={props.store} />}/>
                     </Routes>
                 </div>
             </div>
