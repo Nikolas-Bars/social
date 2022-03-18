@@ -4,9 +4,11 @@ import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import store, {StateType} from "./redux/state"
+import {StateType} from "./redux/store"
+import store from "./redux/redux-store"
 
 let rerenderEntireTree = (state: StateType) => {
+    debugger
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
@@ -16,8 +18,15 @@ let rerenderEntireTree = (state: StateType) => {
         document.getElementById('root')
     );
 }
+
 rerenderEntireTree(store.getState())
-store.subscribe(rerenderEntireTree)
+let jopa = store.getState()
+
+
+store.subscribe(()=>{
+    let state = store.getState()
+    rerenderEntireTree(state)
+})
 
 
 

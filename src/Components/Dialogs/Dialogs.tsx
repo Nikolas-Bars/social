@@ -9,7 +9,7 @@ import {
     DialogsType,
     MessagesType,
 
-} from "../../redux/state";
+} from "../../redux/store";
 import {addNewMessageActionCreator, NewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 
 type DialogsPropsType = {

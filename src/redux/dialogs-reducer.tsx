@@ -1,9 +1,34 @@
-import {ActionTypes, DialogsPageType} from "./state";
+import {ActionTypes, DialogsPageType} from "./store";
+import icon2 from "../img/iconsForDialogs/icon2.jpg";
+import icon3 from "../img/iconsForDialogs/icon3.jpg";
+import icon4 from "../img/iconsForDialogs/icon4.jpg";
+import icon5 from "../img/iconsForDialogs/icon5.jpg";
 
 const NEW_MESSAGE_TEXT = "NEW_MESSAGE_TEXT"
 const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE"
 
-const dialogsReducer = (state: DialogsPageType, action: ActionTypes) => {
+
+
+let initialState = {
+    messages: [
+        {message: 'Hi', id: '1', messageRight: false},
+        {message: 'Hi bro!', id: '2', messageRight: true},
+        {message: 'How are you?', id: '3', messageRight: false},
+        {message: 'I`m fine.', id: '4', messageRight: true},
+        {message: 'It`s good. ', id: '5', messageRight: false}
+    ],
+
+    newMessageText: "your message...",
+
+    dialogs: [
+        {name: 'Sasha', id: '1', img: icon2},
+        {name: 'Lena', id: '2', img: icon3},
+        {name: 'Leha', id: '3', img: icon4},
+        {name: 'Viktor', id: '4', img: icon5},
+    ]
+}
+
+const dialogsReducer = (state: DialogsPageType = initialState, action: ActionTypes) => {
 
     switch (action.type) {
         case "NEW_MESSAGE_TEXT":
