@@ -6,13 +6,16 @@ import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import {StateType} from "./redux/store"
 import store from "./redux/redux-store"
+import StoreContext from './SroreContext';
 
 let rerenderEntireTree = (state: StateType) => {
     debugger
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
+                <StoreContext.Provider value={store}>
                 <App store={store} state={state} dispatch={store.dispatch.bind(store)} />
+                    </StoreContext.Provider>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
@@ -20,7 +23,6 @@ let rerenderEntireTree = (state: StateType) => {
 }
 
 rerenderEntireTree(store.getState())
-let jopa = store.getState()
 
 
 store.subscribe(()=>{

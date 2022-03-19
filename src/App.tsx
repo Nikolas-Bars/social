@@ -9,6 +9,7 @@ import {Route, Routes} from "react-router-dom";
 import {ActionTypes, DialogsPageType, ProfilePageType, SideBarFriendsType, StateType, StoreType} from "./redux/store";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
+
 type AppPropsType = {
     state: StateType
     dispatch: (action: ActionTypes)=>void
@@ -18,12 +19,13 @@ type AppPropsType = {
 const App = (props: AppPropsType) => {
     return (
             <div className={"app-wrapper"}>
+
                 <Header/>
                 <Navbar state={props.state.sideBarFriends}/>
                 <div className={'app-wrapper-content'}>
                     <Routes>
-                        <Route path={'*'} element={<Profile store={props.store} dispatch={props.dispatch}  profilePage={props.state.profilePage} /> }/>
-                        <Route path={'/dialogs/*'} element={<DialogsContainer store={props.store} />}/>
+                        <Route path={'*'} element={<Profile/> }/>
+                        <Route path={'/dialogs/*'} element={<DialogsContainer />}/>
                     </Routes>
                 </div>
             </div>

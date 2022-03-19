@@ -6,39 +6,42 @@ import Message from "./Message/Message";
 import {
     ActionTypes,
     DialogsType,
-    MessagesType, StateType,
+    MessagesType, StateType, StoreType,
 
 } from "../../redux/store";
 import {addNewMessageActionCreator, NewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
-
-type PropsType = {
-    store: any
-}
+import StoreContext from '../../SroreContext';
 
 
 
-const DialogsContainer = (props: PropsType) => {
 
-    let state: StateType = props.store.getState()
+const DialogsContainer = () => {
 
-    let dialogsElement = state.dialogsPage.dialogs.map(el => <div key={el.id}><NavLink to={'/dialogs/' + el.id}><DialogItem name={el.name} img={el.img}/></NavLink></div>)
-    let messagesElement = state.dialogsPage.messages.map(el => <div className={el.messageRight ? s.messageRight : s.messageLeft} key={el.id}><Message  message={el.message} /></div>)
-
-    let onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>{
-        let text = e.currentTarget.value
-        props.store.dispatch(NewMessageTextActionCreator(text))
-    }
-
-    let onClickHandler =()=>{
-        if(state.dialogsPage.newMessageText.trim() !== ''){
-            props.store.dispatch(addNewMessageActionCreator())
-            props.store.dispatch(NewMessageTextActionCreator(''))
-        } }
 
 
     return (
-     <Dialogs onClickHandler={onClickHandler} dialogsPage={state.dialogsPage}  onChangeHandler={onChangeHandler}/>
+        <StoreContext.Consumer>{(store: StoreType)=> {
+
+            let state: StateType = store.getState()
+
+            let dialogsElement = state.dialogsPage.dialogs.map(el => <div key={el.id}><NavLink to={'/dialogs/' + el.id}><DialogItem name={el.name} img={el.img}/></NavLink></div>)
+            let messagesElement = state.dialogsPage.messages.map(el => <div className={el.messageRight ? s.messageRight : s.messageLeft} key={el.id}><Message  message={el.message} /></div>)
+
+            let onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>{
+                let text = e.currentTarget.value
+                store.dispatch(NewMessageTextActionCreator(text))
+            }
+
+            let onClickHandler =()=>{
+                if(state.dialogsPage.newMessageText.trim() !== ''){
+                    store.dispatch(addNewMessageActionCreator())
+                    store.dispatch(NewMessageTextActionCreator(''))
+                } }
+
+
+            return <Dialogs onClickHandler={onClickHandler} dialogsPage={state.dialogsPage} onChangeHandler={onChangeHandler}/>}}
+        </StoreContext.Consumer>
 
     )
 }

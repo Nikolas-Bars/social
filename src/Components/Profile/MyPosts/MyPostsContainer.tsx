@@ -3,49 +3,48 @@ import Post from "./Post/Post";
 import {
     ActionTypes,
     PostType,
-    StateType,
+    StateType, StoreType,
 } from "../../../redux/store";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
-
-type PropsType ={
-    store: any
-}
+import StoreContext from "../../../SroreContext";
 
 
+const MyPostsContainer = () => {
 
-const MyPostsContainer = (props: PropsType) => {
+    return (
 
-let state: StateType = props.store.getState()
+        <StoreContext.Consumer>{(store: StoreType) => {
 
-    const addPost =()=>{
-    debugger
-        if(state.profilePage.newPostText.trim() !== ''){
+            let state: StateType = store.getState()
 
-            props.store.dispatch(addPostActionCreator())
+            const addPost = () => {
 
+                if (state.profilePage.newPostText.trim() !== '') {
+                    store.dispatch(addPostActionCreator())
+
+                }
+            }
+
+            const onPostChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+                let text = event.currentTarget.value;
+                store.dispatch(updateNewPostTextActionCreator(text))
+            }
+
+            const onKeyPressEnter = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+                if (event.code === "Enter") {
+                    addPost()
+                }
+            }
+
+
+            return <MyPosts addPost={addPost}
+                            onKeyPressEnter={onKeyPressEnter}
+                            onPostChange={onPostChange} profilePage={state.profilePage}
+                            newPostText={state.profilePage.newPostText} />
         }
-    }
-
-    const onPostChange =(event: ChangeEvent<HTMLTextAreaElement>)=>{
-        let text = event.currentTarget.value;
-        props.store.dispatch(updateNewPostTextActionCreator(text))
-    }
-
-    const onKeyPressEnter = (event: KeyboardEvent<HTMLTextAreaElement>) =>{
-        if(event.code === "Enter"){
-        addPost()
         }
-    }
-
-    let postsElement = state.profilePage.posts.map(post => <Post message={post.message} likesCount={post.likesCount} key={post.id}/>).reverse()
-
-    return (<MyPosts addPost={addPost}
-                     onKeyPressEnter={onKeyPressEnter}
-                     onPostChange={onPostChange}
-                     postsElement={postsElement}
-                     newPostText={state.profilePage.newPostText} />
-
+        </StoreContext.Consumer>
     )
 }
 

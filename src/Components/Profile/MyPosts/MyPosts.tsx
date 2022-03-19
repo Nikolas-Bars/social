@@ -1,16 +1,16 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import Post from "./Post/Post";
 import s from './MyPost.module.css'
-import {ActionTypes, PostType, } from "../../../redux/store";
+import {ActionTypes, PostType, ProfilePageType,} from "../../../redux/store";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 type PropsType ={
     addPost:()=>void
     onPostChange:(event: ChangeEvent<HTMLTextAreaElement>)=>void
     onKeyPressEnter:(event: KeyboardEvent<HTMLTextAreaElement>)=>void
-    postsElement: Array<any>
     newPostText: string
-    }
+    profilePage: ProfilePageType
+}
 /*    addPost: ()=>void
     upText: (text: string)=>void*/
 
@@ -32,6 +32,13 @@ const MyPosts = (props: PropsType) => {
         props.onKeyPressEnter(event)
     }
 
+    let postsElement = props.profilePage.posts.map(post => {
+
+        debugger
+
+        return <Post message={post.message} likesCount={post.likesCount} key={post.id}/>
+    }).reverse()
+
     return (
         <div className={s.postsBlock}>
             <h3>My Posts</h3>
@@ -44,7 +51,7 @@ const MyPosts = (props: PropsType) => {
                 </div>
             </div>
             <div>
-                {props.postsElement}
+                {postsElement}
             </div>
         </div>
     )
