@@ -21,18 +21,20 @@ const profileReducer =(state:ProfilePageType = initialState, action: ActionTypes
 
     switch (action.type) {
         case "ADD-POST":
+            let stateCopy = {...state, posts: [{...state.posts[0]},{...state.posts[1]},{...state.posts[2]}]}
             let newPost = {
-                id: state.posts.length + 1,
+                id: stateCopy.posts.length + 1,
                 message: state.newPostText,
                 likesCount: 14
             }
-            state.posts.push(newPost)
-            state.newPostText = "";
-            return state
+            stateCopy.posts.push(newPost)
+            stateCopy.newPostText = "";
+            return stateCopy
 
         case "UPDATE-TEXT":
-            state.newPostText = action.text;
-            return state
+            let stateCopy1 = {...state, posts: [{...state.posts[0]},{...state.posts[1]},{...state.posts[2]}]}
+            stateCopy1.newPostText = action.text;
+            return stateCopy1
         default:
             return state
     }

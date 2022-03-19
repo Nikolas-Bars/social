@@ -1,8 +1,4 @@
 import React, {ChangeEvent, useState} from 'react'
-import s from './../Dialogs/Dialogs.module.css'
-import {NavLink} from "react-router-dom";
-import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
 import {
     ActionTypes,
     DialogsType,
@@ -11,12 +7,12 @@ import {
 } from "../../redux/store";
 import {addNewMessageActionCreator, NewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
-import StoreContext from '../../SroreContext';
+import {connect} from "react-redux";
 
 
 
 
-const DialogsContainer = () => {
+/*const DialogsContainer = () => {
 
 
 
@@ -44,6 +40,34 @@ const DialogsContainer = () => {
         </StoreContext.Consumer>
 
     )
+}*/
+
+
+
+let mapStateToProps = (state: StateType) =>{
+    return {
+        dialogsPage: state.dialogsPage,
+    }
 }
+
+let mapDispatchToProps = (dispatch: any) =>{
+    return {
+        onClickHandler: ()=>{
+                           dispatch(addNewMessageActionCreator())
+                dispatch(NewMessageTextActionCreator(''))
+             },
+        onChangeHandler: (e: ChangeEvent<HTMLInputElement>)=>{
+            let text = e.currentTarget.value
+            dispatch(NewMessageTextActionCreator(text))
+        }
+
+        }
+
+    }
+
+
+
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 export default DialogsContainer

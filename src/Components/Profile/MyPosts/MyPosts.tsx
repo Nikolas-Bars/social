@@ -7,8 +7,7 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../red
 type PropsType ={
     addPost:()=>void
     onPostChange:(event: ChangeEvent<HTMLTextAreaElement>)=>void
-    onKeyPressEnter:(event: KeyboardEvent<HTMLTextAreaElement>)=>void
-    newPostText: string
+        newPostText: string
     profilePage: ProfilePageType
 }
 /*    addPost: ()=>void
@@ -28,9 +27,6 @@ const MyPosts = (props: PropsType) => {
         props.onPostChange(event)
     }
 
-    const onKeyPressEnter = (event: KeyboardEvent<HTMLTextAreaElement>) =>{
-        props.onKeyPressEnter(event)
-    }
 
     let postsElement = props.profilePage.posts.map(post => {
 
@@ -44,7 +40,7 @@ const MyPosts = (props: PropsType) => {
             <h3>My Posts</h3>
             <div className={s.myposts}>
                 <div className={s.textareaa}>
-                    <textarea onKeyPress={onKeyPressEnter} onChange={onPostChange} value={props.newPostText} />
+                    <textarea  onChange={onPostChange} value={props.newPostText} />
                 </div>
                 <div className={s.buttonPost}>
                     <button onClick={addPost}>Добавить пост</button>
