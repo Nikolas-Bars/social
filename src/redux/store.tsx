@@ -5,11 +5,14 @@ import icon5 from '../img/iconsForDialogs/icon5.jpg'
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import {setUsersAC, userFollowingToggleAC} from "./userReducer";
 
+/*
 let rerenderEntireTree = (state: typeof store.getState) => {
 
 } // переименуем в callSubscriber
 
+*/
 
 
 export type PostType = {
@@ -27,7 +30,7 @@ export type DialogsType = {
     id: string
     img: string
 }
-type FriendsType = {
+export type FriendsType = {
     img: string
     id: string
 }
@@ -43,12 +46,31 @@ export type DialogsPageType = {
 export type SideBarFriendsType = {
     friends: Array<FriendsType>
 }
+
+
+export type UsersType = {
+
+    id: number,
+    name: string
+    photos: {small: null | string, large: null | string}
+    followed: boolean
+    status: null | string
+    uniqueUrlName: null | string
+
+}
+
+export type usersPageType = {
+    users: Array<UsersType>
+}
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sideBarFriends: SideBarFriendsType
+    usersPage: usersPageType
 
 }
+
 export type StoreType = {
     _state: StateType,
     _callSubscriber: (state: StateType) => void
@@ -56,9 +78,38 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionTypes) => void
 }
+
 type ObserverType = (state: StateType) => void
 
-let store: StoreType = {
+export type ActionTypes =
+    ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof NewMessageTextActionCreator>
+    | ReturnType<typeof addNewMessageActionCreator>
+    | ReturnType<typeof userFollowingToggleAC> |
+    ReturnType<typeof setUsersAC>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*let store: StoreType = {
 
     _state: {
         profilePage: {
@@ -114,7 +165,7 @@ let store: StoreType = {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sideBarFriends = sidebarReducer(this._state.sideBarFriends, action)
-        this._callSubscriber(this._state)
+        this._callSubscriber(this._state)*/
 /*        if (action.type === 'ADD-POST') {
             let newPost = {
                 id: this._state.profilePage.posts.length + 1,
@@ -141,16 +192,13 @@ let store: StoreType = {
                 })
             this._callSubscriber(this._state)
         }*/
+/*
     }
 }
+*/
 
 
 //////////////////////////////////////
-
-export type ActionTypes =
-    ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
-    | ReturnType<typeof NewMessageTextActionCreator>
-    | ReturnType<typeof addNewMessageActionCreator>
 
 
 
@@ -158,8 +206,10 @@ export type ActionTypes =
 
 //////////////////////////////////////
 
+/*
 
 export default store
+*/
 
 
 /*let state = {

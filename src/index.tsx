@@ -8,15 +8,15 @@ import {StateType} from "./redux/store"
 import store from "./redux/redux-store"
 import {Provider} from "react-redux";
 
-let rerenderEntireTree = (state: StateType) => {
-    debugger
+
+
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
 
 
                 <Provider store={store}>
-                    <App store={store} state={state} dispatch={store.dispatch.bind(store)}/>
+                    <App store={store} dispatch={store.dispatch.bind(store)}/>
                 </Provider>
 
 
@@ -27,15 +27,11 @@ let rerenderEntireTree = (state: StateType) => {
         </React.StrictMode>,
         document.getElementById('root')
     );
-}
-
-rerenderEntireTree(store.getState())
 
 
-store.subscribe(()=>{
-    let state = store.getState()
-    rerenderEntireTree(state)
-})
+
+
+
 
 
 

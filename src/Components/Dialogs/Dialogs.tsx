@@ -32,7 +32,9 @@ const Dialogs = (props: DialogsPropsType) => {
     }
 
     let onClickHandler =()=>{
+        if(props.dialogsPage.newMessageText.trim() !== ''){
         props.onClickHandler()
+    }
     }
 
 

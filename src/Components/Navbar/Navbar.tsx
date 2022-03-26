@@ -19,9 +19,13 @@ const Navbar = (props: NavBarPropsType) => {
                 <NavLink to={'/profile'} style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>Profile</NavLink>
             </div>
             <div className={`${s.i1} ${s.nav}`}>
-                <NavLink to={'/dialogs'}
-                         style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>Messages</NavLink>
+            <NavLink to={'/dialogs'}
+                     style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>Messages</NavLink>
+        </div>
+            <div className={s.nav}>
+                <NavLink to={'/users'} style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>Users</NavLink>
             </div>
+
             <div className={s.nav}>
                 <NavLink to={'/News'} style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>News</NavLink>
             </div>

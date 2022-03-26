@@ -57,6 +57,7 @@ let mapDispatchToProps = (dispatch: any) =>{
                 dispatch(NewMessageTextActionCreator(''))
              },
         onChangeHandler: (e: ChangeEvent<HTMLInputElement>)=>{
+
             let text = e.currentTarget.value
             dispatch(NewMessageTextActionCreator(text))
         }

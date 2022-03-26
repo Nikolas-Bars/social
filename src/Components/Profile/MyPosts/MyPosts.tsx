@@ -20,17 +20,15 @@ const MyPosts = (props: PropsType) => {
 
 
     const addPost =()=>{
+        if(props.newPostText.trim() !== ''){
         props.addPost()
-    }
+    }}
 
     const onPostChange =(event: ChangeEvent<HTMLTextAreaElement>)=>{
         props.onPostChange(event)
     }
 
-
     let postsElement = props.profilePage.posts.map(post => {
-
-        debugger
 
         return <Post message={post.message} likesCount={post.likesCount} key={post.id}/>
     }).reverse()
