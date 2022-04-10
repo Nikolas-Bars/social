@@ -1,12 +1,10 @@
 import React from 'react';
 import './App.css';
-import Rica from './img/Rica.jpg'
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
-import Dialogs from "./Components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
-import {ActionTypes, DialogsPageType, ProfilePageType, SideBarFriendsType, StateType, StoreType} from "./redux/store";
+import {ActionTypes} from "./redux/store";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UserContainer from "./Components/Users/UserContainer";
 

@@ -5,7 +5,13 @@ import icon5 from '../img/iconsForDialogs/icon5.jpg'
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import {setUsersAC, userFollowingToggleAC} from "./userReducer";
+import {
+    setCurrentPageAC,
+    setTotalUserCountAC,
+    setUsersAC,
+    toggleIsFetchingAC,
+    userFollowingToggleAC
+} from "./userReducer";
 
 /*
 let rerenderEntireTree = (state: typeof store.getState) => {
@@ -61,6 +67,10 @@ export type UsersType = {
 
 export type usersPageType = {
     users: Array<UsersType>
+    pageSize: number,
+    count: number,
+    currentPage: number
+    isFetching: boolean
 }
 
 export type StateType = {
@@ -82,11 +92,15 @@ export type StoreType = {
 type ObserverType = (state: StateType) => void
 
 export type ActionTypes =
-    ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+      ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof NewMessageTextActionCreator>
     | ReturnType<typeof addNewMessageActionCreator>
-    | ReturnType<typeof userFollowingToggleAC> |
-    ReturnType<typeof setUsersAC>
+    | ReturnType<typeof userFollowingToggleAC>
+    | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUserCountAC>
+    | ReturnType<typeof toggleIsFetchingAC>
 
 
 
