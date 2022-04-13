@@ -4,7 +4,6 @@ import {NavLink} from "react-router-dom";
 import NavBarFriends from "./NavBarFriends";
 
 
-
 type NavBarPropsType = {
     state: {
         friends: Array<any>
@@ -12,16 +11,19 @@ type NavBarPropsType = {
 }
 
 const Navbar = (props: NavBarPropsType) => {
-        let friendsElement = props.state.friends.map(el => <NavBarFriends id={el.id} img={el.img} key={el.id}/>)
+    let friendsElement = props.state.friends.map(el => <NavBarFriends id={el.id} img={el.img} key={el.id}/>)
     return (
         <nav className={s.navbar}>
             <div className={s.nav}>
-                <NavLink to={'/profile'} style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>Profile</NavLink>
+                <NavLink to={'/profile/'}
+                         style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>Profile</NavLink>
             </div>
+
+
             <div className={`${s.i1} ${s.nav}`}>
-            <NavLink to={'/dialogs'}
-                     style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>Messages</NavLink>
-        </div>
+                <NavLink to={'/dialogs'}
+                         style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>Messages</NavLink>
+            </div>
             <div className={s.nav}>
                 <NavLink to={'/users'} style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>Users</NavLink>
             </div>

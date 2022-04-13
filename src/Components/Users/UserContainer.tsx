@@ -4,11 +4,10 @@ import preloader from '../../img/Walk.gif'
 
 import {ActionTypes, StateType, UsersType} from "../../redux/store";
 import {
-    setCurrentPageAC,
-    setTotalUserCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    userFollowingToggleAC
+    setCurrentPage, setTotalUserCount,
+    setUsers,
+    toggleFollow, toggleIsFetching
+
 } from "../../redux/userReducer";
 import axios from "axios";
 import UsersFunctional from "./Users";
@@ -24,7 +23,7 @@ type PropsType = {
     setCurrentPage: (currentPage: number)=> void
     setTotalUserCount: (totalCount: number)=> void
     isFetching: boolean
-    toggleIsFetching: ()=>void
+    toggleIsFetching: (isFetching: boolean)=>void
 
 
 }
@@ -33,7 +32,7 @@ class UsersContainer extends React.Component<PropsType>{
 
     componentDidMount(): void {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response =>{
-            this.props.toggleIsFetching()
+            this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUserCount(response.data.totalCount)
 
@@ -41,10 +40,10 @@ class UsersContainer extends React.Component<PropsType>{
     }
 
     onClick = (pageNumber: number) => {
-        this.props.toggleIsFetching()
+        this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response =>{
-            this.props.toggleIsFetching()
+            this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUserCount(response.data.totalCount)
 
@@ -83,7 +82,7 @@ let mapStateToProps = (state: StateType) =>{
    }
 }
 
-let mapDispatchToProps = (dispatch: (action: ActionTypes) => void) =>{
+/*let mapDispatchToProps = (dispatch: (action: ActionTypes) => void) =>{
     return {
         toggleFollow: (id: number)=>{
             dispatch(userFollowingToggleAC(id))
@@ -102,6 +101,8 @@ let mapDispatchToProps = (dispatch: (action: ActionTypes) => void) =>{
             dispatch(toggleIsFetchingAC())
         },
     }
-}
+}*/
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+    toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching
+})(UsersContainer);

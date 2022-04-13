@@ -44,7 +44,7 @@ const userReducer = (state:usersPageType = initialState, action: ActionTypes) =>
         case "TOGGLE_IS_FETCHING":
             return {
                 ...state,
-                isFetching: !state.isFetching
+                isFetching: action.isFetching
         }
         default:
                    return state
@@ -54,10 +54,10 @@ const userReducer = (state:usersPageType = initialState, action: ActionTypes) =>
 
 export default userReducer
 
-export const userFollowingToggleAC =(id: number)=> ({type: TOGGLE, id: id}as const)
-export const setUsersAC =(users: Array<UsersType>)=> ({type: SET_USERS, users: users}as const)
-export const setCurrentPageAC =(currentPage: number)=> ({type: SET_CURRENT_PAGE, currentPage}as const)
-export const setTotalUserCountAC =(count: number)=> ({type: SET_TOTAL_USER_COUNT, count}as const)
-export const toggleIsFetchingAC =()=> ({type: TOGGLE_IS_FETCHING}as const)
+export const toggleFollow =(id: number)=> ({type: TOGGLE, id: id}as const)
+export const setUsers =(users: Array<UsersType>)=> ({type: SET_USERS, users: users}as const)
+export const setCurrentPage =(currentPage: number)=> ({type: SET_CURRENT_PAGE, currentPage}as const)
+export const setTotalUserCount =(count: number)=> ({type: SET_TOTAL_USER_COUNT, count}as const)
+export const toggleIsFetching =(isFetching: boolean)=> ({type: TOGGLE_IS_FETCHING, isFetching}as const)
 
 

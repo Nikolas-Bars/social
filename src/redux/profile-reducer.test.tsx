@@ -2,16 +2,20 @@ import {ActionTypes, ProfilePageType} from "./store";
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 
 
-let initialState = {
-    posts: [
-        {id: 1, message: "It`s my first post!", likesCount: 4},
-        {id: 2, message: "IT-incubator", likesCount: 89},
-        {id: 3, message: "Post", likesCount: 454},
-        {id: 4, message: "Kabzda kak prosto!!", likesCount: 7},
-    ],
+let initialState: ProfilePageType
 
-    newPostText: 'it-incubator'
-}
+beforeEach(()=>{
+    initialState = {
+        posts: [
+            {id: 1, message: "It`s my first post!", likesCount: 4},
+            {id: 2, message: "IT-incubator", likesCount: 89},
+            {id: 3, message: "Post", likesCount: 454},
+            {id: 4, message: "Kabzda kak prosto!!", likesCount: 7},
+        ],
+        profile: null,
+        newPostText: 'it-incubator'
+    }
+})
 
 test('new post should be added', ()=>{
 

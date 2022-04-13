@@ -1,6 +1,7 @@
 import React from 'react';
 import {UsersType} from "../../redux/store";
 import cat from '../../img/cat.png'
+import {NavLink} from "react-router-dom";
 
 
 type PropsType = {
@@ -13,6 +14,8 @@ type PropsType = {
 }
 
 const Users = (props: PropsType) => {
+
+
 
     let pagesCount = Math.ceil(props.totalUsersCount/ props.pageSize)
     let pages = []
@@ -40,12 +43,30 @@ const Users = (props: PropsType) => {
 
     } as const
 
+    let styleButton = {
+        active: {color: "gold", backgroundColor: 'blue'},
+        noactive: {color: "white", backgroundColor: 'black'}
+    }as const
+
+    let styleImgAndNameBlock = {
+        display: "flex",
+        justifyContent: "space-between",
+        color: "gold", backgroundColor: 'blue',
+        borderRadius: '12px', padding: '5px'} as const
+
+    let styleStatus =  {
+        display: "flex",
+        color: "blue",
+        backgroundColor: 'gold',
+        margin: '20px',
+        borderRadius: '12px',
+        padding: '10px'}
 
     return (
         <>
             {pages.map(el => <button key={el} onClick={() => {
             props.onClick(el)
-        }} style={props.currentPage === el ? {color: "gold", backgroundColor: 'blue'} : {color: "white", backgroundColor: 'black'}}>{el}</button>)}
+        }} style={props.currentPage === el ? styleButton.active : styleButton.noactive}>{el}</button>)}
             <div style={styleUserBlock}>
 
                 {props.users.map(el => {
@@ -53,27 +74,25 @@ const Users = (props: PropsType) => {
 
                         <div key={el.id} style={styleUser}>
 
-                            <div style={{display: "flex", justifyContent: "space-between", color: "gold", backgroundColor: 'blue', borderRadius: '12px', padding: '5px'}}>
+                            <div style={styleImgAndNameBlock}>
 
-                                <div style={{display: "flex"}}><img style={{width: '40px', height: '40px', margin: '10px'}} src={el.photos.small || cat}/>
+                                <div style={{display: "flex"}}>
+                                    <NavLink to={'/profile/' + el.id}>
+                                         <img style={{width: '40px', height: '40px', margin: '10px'}} src={el.photos.small || cat}/>
+                                    </NavLink>
+                                    {el.name}
+                                 </div>
 
-                                {el.name}
-                            </div>
+
+                                {el.status ?  <div style={styleStatus}>{el.status}</div>
+                                : <div style={styleStatus}> place for status </div>}
+
+                           </div>
 
 
-                                {el.status ?  <div style={{ display: "flex",  color: "blue", backgroundColor: 'gold', margin: '20px', borderRadius: '12px',  padding: '10px'}}>
-                                {el.status}
 
-                            </div> : <div style={{ display: "flex",  color: "blue", backgroundColor: 'gold', margin: '20px', borderRadius: '12px',  padding: '10px'}}>
-                                    place for status
-                                </div> }
-                        </div>
-                            {el.followed ? <button style={{margin: '10px'}} onClick={() => {
-                                    props.toggleFollow(el.id)
-                                }}>follow</button> :
-                                <button style={{margin: '10px'}} onClick={() => {
-                                    props.toggleFollow(el.id)
-                                }}>unFollow</button>}
+                            {el.followed ? <button style={{margin: '10px'}} onClick={() => {props.toggleFollow(el.id)}}>follow</button>
+                                :<button style={{margin: '10px'}} onClick={() => {props.toggleFollow(el.id)}}>unFollow</button>}
                         </div>
 
                     )

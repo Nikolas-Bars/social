@@ -2,15 +2,11 @@ import icon2 from '../img/iconsForDialogs/icon2.jpg'
 import icon3 from '../img/iconsForDialogs/icon3.jpg'
 import icon4 from '../img/iconsForDialogs/icon4.jpg'
 import icon5 from '../img/iconsForDialogs/icon5.jpg'
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+import profileReducer, {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {
-    setCurrentPageAC,
-    setTotalUserCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    userFollowingToggleAC
+    toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching
 } from "./userReducer";
 
 /*
@@ -42,8 +38,35 @@ export type FriendsType = {
 }
 export type ProfilePageType = {
     posts: Array<PostType>
+    profile: null | ProfileType
     newPostText: string
 }
+
+export type ProfileType = {    // как правильно протипизировать???
+    "aboutMe": null | string,
+    "contacts": {
+        'dqwd': string  // почему ts не ругается когда приходит response без этого св-ва????
+        "facebook": null | string,
+        "website": null | string,
+        "vk": null | string,
+        "twitter": null | string,
+        "instagram": null | string,
+        "youtube": null | string,
+        "github": null | string,
+        "mainLink": null | string
+    },
+    "lookingForAJob": boolean,
+    "lookingForAJobDescription": null | boolean,
+    "fullName": null | string,
+    "userId": number,
+    "photos": {
+        "small": null | string,
+        "large": null | string
+    }
+}
+
+
+
 export type DialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
@@ -96,11 +119,12 @@ export type ActionTypes =
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof NewMessageTextActionCreator>
     | ReturnType<typeof addNewMessageActionCreator>
-    | ReturnType<typeof userFollowingToggleAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUserCountAC>
-    | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUserCount>
+    | ReturnType<typeof toggleFollow>
+    |ReturnType<typeof setUserProfile>
 
 
 
