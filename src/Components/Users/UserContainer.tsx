@@ -6,7 +6,7 @@ import {ActionTypes, StateType, UsersType} from "../../redux/store";
 import {
     setCurrentPage, setTotalUserCount,
     setUsers,
-    toggleFollow, toggleIsFetching
+    toggleFollow, toggleFollowingProgress, toggleIsFetching
 
 } from "../../redux/userReducer";
 import axios from "axios";
@@ -25,7 +25,8 @@ type PropsType = {
     setTotalUserCount: (totalCount: number)=> void
     isFetching: boolean
     toggleIsFetching: (isFetching: boolean)=>void
-
+    toggleFollowingProgress: (isFetching: boolean, userID: number)=>void
+    folliwingProgress: number[]
 
 }
 
@@ -65,6 +66,8 @@ class UsersContainer extends React.Component<PropsType>{
                 onClick={this.onClick}
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
+                toggleFollowingProgress={this.props.toggleFollowingProgress}
+                folliwingProgress={this.props.folliwingProgress}
             />
 
         </div>;
@@ -80,9 +83,10 @@ let mapStateToProps = (state: StateType) =>{
        totalUsersCount: state.usersPage.count,
        currentPage: state.usersPage.currentPage,
        isFetching: state.usersPage.isFetching,
+       folliwingProgress: state.usersPage.folliwingProgress,
    }
 }
 
 export default connect(mapStateToProps, {
-    toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching
+    toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching, toggleFollowingProgress
 })(UsersContainer);

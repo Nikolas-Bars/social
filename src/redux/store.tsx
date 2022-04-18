@@ -6,7 +6,7 @@ import profileReducer, {addPostActionCreator, setUserProfile, updateNewPostTextA
 import dialogsReducer, {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {
-    toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching
+    toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching, toggleFollowingProgress
 } from "./userReducer";
 import {setUserDataAC} from "./auth-reducer";
 
@@ -83,7 +83,6 @@ export type AuthStateType = {
     isAuth: boolean
 }
 
-
 export type UsersType = {
 
     id: number,
@@ -101,6 +100,7 @@ export type usersPageType = {
     count: number,
     currentPage: number
     isFetching: boolean
+    folliwingProgress: number[]
 }
 
 export type StateType = {
@@ -133,6 +133,7 @@ export type ActionTypes =
     | ReturnType<typeof toggleFollow>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserDataAC>
+    | ReturnType<typeof toggleFollowingProgress>
 
 
 /*let store: StoreType = {

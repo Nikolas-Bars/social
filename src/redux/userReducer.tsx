@@ -6,19 +6,22 @@ const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USER_COUNT = 'SET_TOTAL_USER_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS'
+
 
 let initialState = {
     users: [],
     pageSize: 100,
     count: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: true, //для preloader
+    folliwingProgress: [] as number[],
 }
 
 const userReducer = (state:usersPageType = initialState, action: ActionTypes) => {
     switch(action.type) {
         case 'TOGGLE':
-            debugger
+
             return {
                 ...state,
 
@@ -46,6 +49,12 @@ const userReducer = (state:usersPageType = initialState, action: ActionTypes) =>
                 ...state,
                 isFetching: action.isFetching
         }
+        case "TOGGLE_FOLLOWING_PROGRESS":
+            return {
+                ...state,
+                folliwingProgress: action.isFetching ? [...state.folliwingProgress, action.id]
+                    : [...state.folliwingProgress.filter(id => id !== action.id)]               ,
+            }
         default:
                    return state
 
@@ -59,5 +68,6 @@ export const setUsers =(users: Array<UsersType>)=> ({type: SET_USERS, users: use
 export const setCurrentPage =(currentPage: number)=> ({type: SET_CURRENT_PAGE, currentPage}as const)
 export const setTotalUserCount =(count: number)=> ({type: SET_TOTAL_USER_COUNT, count}as const)
 export const toggleIsFetching =(isFetching: boolean)=> ({type: TOGGLE_IS_FETCHING, isFetching}as const)
+export const toggleFollowingProgress =(isFetching: boolean, id: number)=>({type: TOGGLE_FOLLOWING_PROGRESS, isFetching, id}) as const
 
 
