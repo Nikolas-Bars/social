@@ -8,6 +8,7 @@ import sidebarReducer from "./sidebar-reducer";
 import {
     toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching
 } from "./userReducer";
+import {setUserDataAC} from "./auth-reducer";
 
 /*
 let rerenderEntireTree = (state: typeof store.getState) => {
@@ -66,7 +67,6 @@ export type ProfileType = {    // как правильно протипизир
 }
 
 
-
 export type DialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
@@ -76,12 +76,19 @@ export type SideBarFriendsType = {
     friends: Array<FriendsType>
 }
 
+export type AuthStateType = {
+    id: number | null,
+    email: string,
+    login: string,
+    isAuth: boolean
+}
+
 
 export type UsersType = {
 
     id: number,
     name: string
-    photos: {small: null | string, large: null | string}
+    photos: { small: null | string, large: null | string }
     followed: boolean
     status: null | string
     uniqueUrlName: null | string
@@ -115,7 +122,7 @@ export type StoreType = {
 type ObserverType = (state: StateType) => void
 
 export type ActionTypes =
-      ReturnType<typeof addPostActionCreator>
+    ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof NewMessageTextActionCreator>
     | ReturnType<typeof addNewMessageActionCreator>
@@ -124,27 +131,8 @@ export type ActionTypes =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUserCount>
     | ReturnType<typeof toggleFollow>
-    |ReturnType<typeof setUserProfile>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setUserDataAC>
 
 
 /*let store: StoreType = {
@@ -237,9 +225,6 @@ export type ActionTypes =
 
 
 //////////////////////////////////////
-
-
-
 
 
 //////////////////////////////////////
