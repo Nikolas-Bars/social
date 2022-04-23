@@ -12,8 +12,9 @@ type PropsType = {
     currentPage: number
     pageSize: number
     totalUsersCount: number
-    toggleFollowingProgress: (isFetching: boolean, userID: number)=>void
     folliwingProgress: number[]
+    followTC: (userID: number)=> void
+    unFollowTC: (userID: number)=> void
 }
 
 const Users = (props: PropsType) => {
@@ -99,27 +100,12 @@ const Users = (props: PropsType) => {
 
                             {el.followed ?
 
-
                                 <button disabled={props.folliwingProgress.some(id => id == el.id)} style={{margin: '10px'}} onClick={() => {
-                                    props.toggleFollowingProgress(true, el.id)
-                                        usersAPI.unFollowUsers(el.id).then(resultCode => {
-                                            if (resultCode === 0) {
-                                                props.toggleFollow(el.id)
-                                                props.toggleFollowingProgress(false, el.id)
-                                            }
-                                        }
-                                    )
+                                    props.followTC(el.id)
                                 }}>unFollow</button>
 
                                 : <button disabled={props.folliwingProgress.some(id => id == el.id)} style={{margin: '10px'}} onClick={() => {
-                                    props.toggleFollowingProgress(true, el.id)
-                                    usersAPI.followUsers(el.id).then(resultCode => {
-                                            if (resultCode === 0) {
-                                                props.toggleFollow(el.id)
-                                                props.toggleFollowingProgress(false, el.id)
-                                            }
-                                        }
-                                    )
+                                    props.unFollowTC(el.id)
                                 }}>follow</button>
                             }
 

@@ -14,11 +14,23 @@ export const usersAPI = {
     getUsers: (currentPage: number = 1, pageSize: number = 1) => {
         return instance.get(`/users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
-    followUsers: (id: number) => {
-        return instance.post(`/follow/${id}`).then(response => response.data.resultCode)
+    followUsers: (userID: number) => {
+        return instance.post(`/follow/${userID}`).then(response => response.data.resultCode)
     },
-    unFollowUsers: (id: number) => {
-        return instance.delete(`/follow/${id}`).then(response => response.data.resultCode)
+    unFollowUsers: (userID: number) => {
+        return instance.delete(`/follow/${userID}`).then(response => response.data.resultCode)
     },
+}
+
+export const authAPI = {
+    isAuth: () => {
+        return instance.get('/auth/me').then(response => response.data)
+    }
+}
+
+export const profileAPI = {
+    profileData: (userID: number) => {
+        return instance.get(`/profile/${userID}`).then(response => response.data)
+    }
 }
 

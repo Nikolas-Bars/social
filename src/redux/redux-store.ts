@@ -1,11 +1,11 @@
 import {createStoreHook} from "react-redux";
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import userReducer from "./userReducer";
 import authReducer from "./auth-reducer";
-
+import thunkApplyMiddleware from 'redux-thunk'
 
 
 let reducers = combineReducers({
@@ -18,7 +18,7 @@ let reducers = combineReducers({
 
 export type GlobalStateType = ReturnType<typeof reducers>
 
-let store = createStore(reducers)
+let store = createStore(reducers, applyMiddleware(thunkApplyMiddleware))
 
 
 // @ts-ignore
