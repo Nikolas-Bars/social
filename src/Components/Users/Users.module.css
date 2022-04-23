@@ -1,0 +1,25 @@
+.usersMainContainer{
+    margin: 15px;
+    max-width: 900px;
+}
+
+.styleUser {
+    overflow: hidden;
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    width: 350px;
+}
+
+.styleStatus {
+    display: flex;
+    color: blue;
+    background-color: gold;
+    margin: 20px;
+    border-radius: 12px;
+    padding: 10px;
+}

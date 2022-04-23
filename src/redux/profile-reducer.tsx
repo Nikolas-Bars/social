@@ -73,8 +73,8 @@ export let updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_TEX
 
 export const setUserProfile = (profile: ProfileType | null) => ({type: SET_USER_PROFILE, profile} as const)
 
-export const profileDatatTC = (userID: number) => (dispatch: Dispatch) => {
-    profileAPI.profileData(userID).then(response => {
+export const getUserProfileDatatTC = (userID: number) => (dispatch: Dispatch) => {
+    profileAPI.getProfile(userID).then(response => {
         dispatch(setUserProfile(response))
     })
 }

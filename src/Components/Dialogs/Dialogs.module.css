@@ -1,20 +1,25 @@
 .dialogs{
+    display: flex;
+    padding: 30px;
 
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 300px 500px;
     border-bottom-right-radius: 20px;
+    justify-content: space-between;
 }
 
-.dialogs input {
+.dialogMainContainer input {
     background-color: wheat;
     border-radius: 30px ;
     height: 40px;
     padding: 10px;
-
+    margin: 30px;
 }
 
-.dialogs button{
+.messageBlockDiv{
+    padding: 50px;
+    min-width: 400px;
+}
+
+.dialogMainContainer button{
     border-radius: 40px;
     padding: 10px;
     font-family: "Sitka Banner";
@@ -25,7 +30,7 @@
 
 
 .dialogsItems{
-    padding: 20px;
+    padding: 50px;
 }
 
 .dialogsItems .dialog{
@@ -63,7 +68,7 @@
     border-radius: 30px;
 }
 
-.dialogsImg {
+.dialogsCenter {
     border-right: 2px solid gray;
 }
 

@@ -23,13 +23,13 @@ export const usersAPI = {
 }
 
 export const authAPI = {
-    isAuth: () => {
+    me: () => {
         return instance.get('/auth/me').then(response => response.data)
     }
 }
 
 export const profileAPI = {
-    profileData: (userID: number) => {
+    getProfile: (userID: number) => {
         return instance.get(`/profile/${userID}`).then(response => response.data)
     }
 }

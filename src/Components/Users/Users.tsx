@@ -2,7 +2,8 @@ import React from 'react';
 import {UsersType} from "../../redux/store";
 import cat from '../../img/cat.png'
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../Api/api";
+import s from './Users.module.css'
+
 
 
 type PropsType = {
@@ -32,17 +33,6 @@ const Users = (props: PropsType) => {
         display: 'flex', justifyContent: "space-around", flexDirection: "column", flexWrap: 'wrap'
     } as const
 
-    let styleUser = {
-        overflow: "hidden",
-        backgroundColor: 'aquamarine',
-        display: "flex",
-        flexDirection: "column",
-        border: '1px solid red',
-        margin: '20px', padding: '20px',
-        borderRadius: '12px',
-        width: '350px',
-
-    } as const
 
     let styleButton = {
         active: {color: "gold", backgroundColor: 'blue'},
@@ -56,17 +46,10 @@ const Users = (props: PropsType) => {
         borderRadius: '12px', padding: '5px'
     } as const
 
-    let styleStatus = {
-        display: "flex",
-        color: "blue",
-        backgroundColor: 'gold',
-        margin: '20px',
-        borderRadius: '12px',
-        padding: '10px'
-    }
+
 
     return (
-        <>
+        <div className={s.usersMainContainer}>
             {pages.map(el => <button key={el} onClick={() => {
                 props.onClick(el)
             }} style={props.currentPage === el ? styleButton.active : styleButton.noactive}>{el}</button>)}
@@ -75,7 +58,7 @@ const Users = (props: PropsType) => {
                 {props.users.map(el => {
                     return (
 
-                        <div key={el.id} style={styleUser}>
+                        <div key={el.id} className={s.styleUser}>
 
                             <div style={styleImgAndNameBlock}>
 
@@ -92,8 +75,8 @@ const Users = (props: PropsType) => {
                                 </div>
 
 
-                                {el.status ? <div style={styleStatus}>{el.status}</div>
-                                    : <div style={styleStatus}> place for status </div>}
+                                {el.status ? <div className={s.styleStatus}>{el.status}</div>
+                                    : <div className={s.styleStatus}> place for status </div>}
 
                             </div>
 
@@ -114,7 +97,7 @@ const Users = (props: PropsType) => {
                     )
                 })}
             </div>
-        </>
+        </div>
     );
 };
 

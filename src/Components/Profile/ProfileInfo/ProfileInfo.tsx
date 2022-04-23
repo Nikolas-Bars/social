@@ -43,10 +43,6 @@ const ProfileInfo = (props: PropsType) => {
             <div className={s.descriptionBlock}>
                 <img style={{borderRadius: '20px'}} src={props.profile?.photos.small ? props.profile.photos.small : cat}/>
                 Ava + discription
-
-
-
-
             </div>
 
 

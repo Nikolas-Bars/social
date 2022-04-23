@@ -1,11 +1,22 @@
 .header{
-    background-color: cornflowerblue;
-    grid-area: h;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
     border-top-right-radius: 20px ;
     border-top-left-radius: 20px ;
     padding: 10px;
-}
 
+}
+.headerData{
+    display: flex;
+    justify-content: space-between;
+    width: 950px;
+}
+.headerDataDiv{
+    display: flex;
+    justify-content: space-between;
+    min-width: 100vh;
+}
 .imghead{
     max-width: 40px;
 }

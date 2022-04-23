@@ -1,6 +1,7 @@
 import React from "react";
 import s from './Header.module.css'
 import cat from './../../img/cat.png'
+import {NavLink} from "react-router-dom";
 
 
 type PropsType = {
@@ -9,8 +10,9 @@ type PropsType = {
 
 const Header = (props: PropsType) => {
     return (
-        <header className={s.header} style={{display: 'flex', justifyContent: "space-between"}}>
-
+        <header className={s.header} >
+            <div className={s.headerData}>
+                <div className={s.headerDataDiv}>
             <img src={cat} className={s.imghead}/>
             {props.login
 
@@ -19,10 +21,13 @@ const Header = (props: PropsType) => {
                 </div>
 
 
-                : <button style={{padding: '10px', backgroundColor: 'wheat', borderRadius: '5px'}}>
-                    Login
+                : <button style={{padding: '10px', backgroundColor: 'blue', borderRadius: '5px'}}>
+                    <NavLink to={'/login'}
+                             style={({isActive}) => ({color: isActive ? 'gold' : 'gray'})}>Login</NavLink>
                 </button>}
+            </div>
 
+        </div>
 
         </header>)
 }

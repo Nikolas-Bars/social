@@ -8,6 +8,7 @@ import {
 import {addNewMessageActionCreator, NewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {GlobalStateType} from "../../redux/redux-store";
 
 
 
@@ -44,9 +45,10 @@ import {connect} from "react-redux";
 
 
 
-let mapStateToProps = (state: StateType) =>{
+let mapStateToProps = (state: GlobalStateType) =>{
     return {
         dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 

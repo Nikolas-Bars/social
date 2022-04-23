@@ -1,10 +1,5 @@
-import icon2 from '../img/iconsForDialogs/icon2.jpg'
-import icon3 from '../img/iconsForDialogs/icon3.jpg'
-import icon4 from '../img/iconsForDialogs/icon4.jpg'
-import icon5 from '../img/iconsForDialogs/icon5.jpg'
-import profileReducer, {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
-import dialogsReducer, {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
+import  {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
+import {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
 import {
     toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching, toggleFollowingProgress
 } from "./userReducer";

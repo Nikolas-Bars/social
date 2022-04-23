@@ -14,7 +14,7 @@ let initialState: AuthStateType = {
     id: null,
     email: '',
     login: '',
-    isAuth: false
+    isAuth: false // - залогинены мы или нет
 }
 
 
@@ -40,7 +40,7 @@ const authReducer = (state: AuthStateType = initialState, action: ActionTypes): 
 
 
 export const authTC = () => (dispatch: Dispatch)=>{
-    authAPI.isAuth().then(response => {
+    authAPI.me().then(response => {
         if(response.resultCode === 0){
             debugger
             let {id, email, login} = response.data

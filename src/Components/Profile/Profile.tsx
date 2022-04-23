@@ -1,13 +1,14 @@
 import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {ActionTypes, ProfilePageType, ProfileType} from "../../redux/store";
+import {ProfileType} from "../../redux/store";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
+import s from './Profile.module.css'
 
 
 type PropsType = {
     profile: null | ProfileType,
-    setUserProfile: (profile: null | ProfileType) => void
+    isAuth: boolean
 }
 
 const Profile =(props: PropsType)=>{
@@ -17,7 +18,8 @@ const Profile =(props: PropsType)=>{
     console.log(userID)
 
     return(
-        <div>
+        <div className={s.profileMainContainer}>
+            {!props.isAuth && <Navigate to={'/login'} />}
             <ProfileInfo profile={props.profile}/>
             <MyPostsContainer />
         </div>
