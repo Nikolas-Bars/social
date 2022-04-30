@@ -14,6 +14,7 @@ import {
 import Preloader from "../Preloader/Preloader";
 import Users from "./Users";
 import WithAuthRedirect from "../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 type PropsType = {
     users: Array<UsersType>
@@ -29,7 +30,7 @@ type PropsType = {
     unFollowTC: (userID: number)=> void
 }
 
-class UsersContainer extends React.Component<PropsType> {
+class UsersContain extends React.Component<PropsType> {
 
     componentDidMount(): void {
         this.props.getUsersTC(this.props.currentPage, this.props.pageSize) // currentPage  - текущая страница
@@ -62,7 +63,7 @@ class UsersContainer extends React.Component<PropsType> {
 }
 
 
-let AuthRedirectComponent = WithAuthRedirect(UsersContainer)
+
 
 
 let mapStateToProps = (state: StateType) => {
@@ -76,10 +77,15 @@ let mapStateToProps = (state: StateType) => {
     }
 }
 
-export default connect(mapStateToProps, {
-    toggleFollow,
-    setCurrentPage,
-    getUsersTC,
-    followTC,
-    unFollowTC,
-})(AuthRedirectComponent);
+let UsersContainer = compose(
+    connect(mapStateToProps, {
+        toggleFollow,
+        setCurrentPage,
+        getUsersTC,
+        followTC,
+        unFollowTC,
+    }),
+    WithAuthRedirect
+)(UsersContain)
+
+export default UsersContainer

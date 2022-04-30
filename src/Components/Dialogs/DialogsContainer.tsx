@@ -1,18 +1,11 @@
-import React, {ChangeEvent, useState} from 'react'
-import {
-    ActionTypes, DialogsPageType,
-    DialogsType,
-    MessagesType, StateType, StoreType,
-
-} from "../../redux/store";
+import React, {ChangeEvent} from 'react'
 import {addNewMessageActionCreator, NewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {GlobalStateType} from "../../redux/redux-store";
-import {Navigate} from "react-router-dom";
 import WithAuthRedirect from "../HOC/withAuthRedirect";
 import {withRouter} from "../HOC/withRouter";
-import Profile from "../Profile/Profile";
+import {compose} from "redux";
 
 
 
@@ -74,13 +67,30 @@ let mapDispatchToProps = (dispatch: any) =>{
 
     }
 
-let AuthRedirectComponent = withRouter(WithAuthRedirect(Dialogs))
 
+
+
+//
+// let AuthRedirectComponent = withRouter(WithAuthRedirect(Dialogs))
+//
+//
+//
+//
+// const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
 
 // @ts-ignore
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
 
+
+
+
+
+
+const DialogsContainer: React.FC = compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
+    WithAuthRedirect,
+)(Dialogs)
 
 export default DialogsContainer

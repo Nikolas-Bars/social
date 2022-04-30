@@ -7,6 +7,7 @@ import {ProfileType} from "../../redux/store";
 import {withRouter} from "../HOC/withRouter";
 import {GlobalStateType} from "../../redux/redux-store";
 import WithAuthRedirect from "../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 
 type MapStateToPropsType = {
@@ -42,7 +43,7 @@ class ProfileContainer extends React.Component<PropsType> {
 }
 
 
-let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)
+
 
 const mapStateToProps = (state: GlobalStateType) => {
     return {
@@ -50,11 +51,12 @@ const mapStateToProps = (state: GlobalStateType) => {
     }
 
 }
-
-const WithUrlDataContainerComponent = withRouter<PropsType>(AuthRedirectComponent);
-
 // @ts-ignore
-export default connect(mapStateToProps, {setUserProfile, getUserProfileDatatTC})(WithUrlDataContainerComponent)
+let ProfileContainers: React.FC = compose(
+    connect(mapStateToProps, {setUserProfile, getUserProfileDatatTC}),
+    withRouter,
+    WithAuthRedirect
+)(ProfileContainer)
 
-
+export default ProfileContainers
 

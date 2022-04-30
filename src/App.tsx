@@ -3,11 +3,12 @@ import './App.css';
 import Navbar from "./Components/Navbar/Navbar";
 import {Route, Routes, useParams} from "react-router-dom";
 import {ActionTypes} from "./redux/store";
-import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+
 import UserContainer from "./Components/Users/UserContainer";
-import ProfileContainer from "./Components/Profile/ProfileContainer";
+import ProfileContainers from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
+import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 
 type AppPropsType = {
@@ -18,6 +19,7 @@ type AppPropsType = {
 
 
 const App = (props: AppPropsType) => {
+
 
 
 
@@ -35,8 +37,8 @@ const App = (props: AppPropsType) => {
                         <Route path={'/dialogs/:dialogID'} element={<DialogsContainer />}/>
 
                         <Route path={'/users/'} element={<UserContainer />}/>
-                        <Route path={'/profile/:userID'} element={<ProfileContainer />}/>
-                        <Route path={'/profile/'} element={<ProfileContainer />}/>
+                        <Route path={'/profile/:userID'} element={<ProfileContainers />}/>
+                        <Route path={'/profile/'} element={<ProfileContainers />}/>
                         <Route path={'/login/'} element={<Login />}/>
 
                     </Routes>
