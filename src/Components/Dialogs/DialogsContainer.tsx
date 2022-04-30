@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react'
 import {
-    ActionTypes,
+    ActionTypes, DialogsPageType,
     DialogsType,
     MessagesType, StateType, StoreType,
 
@@ -9,6 +9,10 @@ import {addNewMessageActionCreator, NewMessageTextActionCreator} from "../../red
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {GlobalStateType} from "../../redux/redux-store";
+import {Navigate} from "react-router-dom";
+import WithAuthRedirect from "../HOC/withAuthRedirect";
+import {withRouter} from "../HOC/withRouter";
+import Profile from "../Profile/Profile";
 
 
 
@@ -45,17 +49,19 @@ import {GlobalStateType} from "../../redux/redux-store";
 
 
 
+
+
+
 let mapStateToProps = (state: GlobalStateType) =>{
     return {
         dialogsPage: state.dialogsPage,
-        isAuth: state.auth.isAuth
     }
 }
 
 let mapDispatchToProps = (dispatch: any) =>{
     return {
-        onClickHandler: ()=>{
-                           dispatch(addNewMessageActionCreator())
+        onClickHandler: (dialogID: string)=>{
+                dispatch(addNewMessageActionCreator(dialogID))
                 dispatch(NewMessageTextActionCreator(''))
              },
         onChangeHandler: (e: ChangeEvent<HTMLInputElement>)=>{
@@ -68,9 +74,13 @@ let mapDispatchToProps = (dispatch: any) =>{
 
     }
 
+let AuthRedirectComponent = withRouter(WithAuthRedirect(Dialogs))
 
 
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+// @ts-ignore
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
+
+
 
 export default DialogsContainer

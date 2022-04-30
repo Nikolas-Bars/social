@@ -35,13 +35,13 @@ const Users = (props: PropsType) => {
 
 
     let styleButton = {
-        active: {color: "gold", backgroundColor: 'blue'},
-        noactive: {color: "white", backgroundColor: 'black'}
+        active: {color: "gold", backgroundColor: 'blue', borderRadius: '5px', padding: '5px',},
+        noactive: {color: "white", backgroundColor: 'black', borderRadius: '5px', padding: '5px',}
     } as const
 
     let styleImgAndNameBlock = {
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: 'space-between',
         color: "gold", backgroundColor: 'blue',
         borderRadius: '12px', padding: '5px'
     } as const
@@ -49,34 +49,39 @@ const Users = (props: PropsType) => {
 
 
     return (
+
+
         <div className={s.usersMainContainer}>
+
             {pages.map(el => <button key={el} onClick={() => {
                 props.onClick(el)
             }} style={props.currentPage === el ? styleButton.active : styleButton.noactive}>{el}</button>)}
+
+
+
             <div style={styleUserBlock}>
 
                 {props.users.map(el => {
                     return (
 
-                        <div key={el.id} className={s.styleUser}>
+                        <div key={el.id} style={{display: "flex", justifyContent: 'space-between', flexWrap: 'wrap'}}>
+                            <div className={s.styleUser}>
+                            <div >
 
-                            <div style={styleImgAndNameBlock}>
-
-                                <div style={{display: "flex"}}>
+                                <div style={styleImgAndNameBlock}>
                                     <NavLink to={'/profile/' + el.id}>
+
                                         <img style={{
-                                            width: '40px',
-                                            height: '40px',
+                                            width: '60px',
+                                            height: '60px',
                                             margin: '10px',
                                             borderRadius: '15px'
                                         }} src={el.photos.small || cat}/>
                                     </NavLink>
-                                    {el.name}
+
+                                    <div style={{fontFamily: 'fantasy', color: 'pink', fontSize: '30px'}}>{el.name}</div>
                                 </div>
 
-
-                                {el.status ? <div className={s.styleStatus}>{el.status}</div>
-                                    : <div className={s.styleStatus}> place for status </div>}
 
                             </div>
 
@@ -91,6 +96,15 @@ const Users = (props: PropsType) => {
                                     props.unFollowTC(el.id)
                                 }}>follow</button>
                             }
+
+
+
+                            </div>
+
+                            <div  className={s.statusUser}>
+                                {el.status ? <div className={s.styleStatus}>{el.status}</div>
+                                : <div className={s.styleStatus}> place for status </div>}
+                            </div>
 
                         </div>
 

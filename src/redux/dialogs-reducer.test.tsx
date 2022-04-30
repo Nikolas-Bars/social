@@ -6,6 +6,7 @@ import icon5 from "../img/iconsForDialogs/icon5.jpg";
 import dialogsReducer, {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
 
 test('new message should be added', ()=>{
+/*
 
     let initialState: DialogsPageType = {
         messages: [
@@ -59,6 +60,7 @@ test('newMessageText', ()=>{
 
     expect(newState.newMessageText).toBe('test text')
 
+*/
 
 
 })

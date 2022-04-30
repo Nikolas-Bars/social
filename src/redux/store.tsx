@@ -27,6 +27,7 @@ export type DialogsType = {
     name: string
     id: string
     img: string
+    messages: Array<MessagesType>
 }
 export type FriendsType = {
     img: string
@@ -63,7 +64,6 @@ export type ProfileType = {    // как правильно протипизир
 
 
 export type DialogsPageType = {
-    messages: Array<MessagesType>
     dialogs: Array<DialogsType>
     newMessageText: string
 }

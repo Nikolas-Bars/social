@@ -13,6 +13,7 @@ import {
 } from "../../redux/userReducer";
 import Preloader from "../Preloader/Preloader";
 import Users from "./Users";
+import WithAuthRedirect from "../HOC/withAuthRedirect";
 
 type PropsType = {
     users: Array<UsersType>
@@ -31,7 +32,7 @@ type PropsType = {
 class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount(): void {
-        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
+        this.props.getUsersTC(this.props.currentPage, this.props.pageSize) // currentPage  - текущая страница
     }
 
     onClick = (pageNumber: number) => {
@@ -61,6 +62,9 @@ class UsersContainer extends React.Component<PropsType> {
 }
 
 
+let AuthRedirectComponent = WithAuthRedirect(UsersContainer)
+
+
 let mapStateToProps = (state: StateType) => {
     return {
         users: state.usersPage.users,
@@ -78,4 +82,4 @@ export default connect(mapStateToProps, {
     getUsersTC,
     followTC,
     unFollowTC,
-})(UsersContainer);
+})(AuthRedirectComponent);

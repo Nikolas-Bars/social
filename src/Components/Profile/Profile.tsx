@@ -8,7 +8,6 @@ import s from './Profile.module.css'
 
 type PropsType = {
     profile: null | ProfileType,
-    isAuth: boolean
 }
 
 const Profile =(props: PropsType)=>{
@@ -19,7 +18,6 @@ const Profile =(props: PropsType)=>{
 
     return(
         <div className={s.profileMainContainer}>
-            {!props.isAuth && <Navigate to={'/login'} />}
             <ProfileInfo profile={props.profile}/>
             <MyPostsContainer />
         </div>

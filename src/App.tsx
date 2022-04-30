@@ -31,9 +31,10 @@ const App = (props: AppPropsType) => {
 
                 <div className={'mainContent'}>
                     <Routes>
+                        <Route path={'/dialogs/'} element={<DialogsContainer />}/>
+                        <Route path={'/dialogs/:dialogID'} element={<DialogsContainer />}/>
 
-                        <Route path={'/dialogs/*'} element={<DialogsContainer />}/>
-                        <Route path={'/users/*'} element={<UserContainer />}/>
+                        <Route path={'/users/'} element={<UserContainer />}/>
                         <Route path={'/profile/:userID'} element={<ProfileContainer />}/>
                         <Route path={'/profile/'} element={<ProfileContainer />}/>
                         <Route path={'/login/'} element={<Login />}/>

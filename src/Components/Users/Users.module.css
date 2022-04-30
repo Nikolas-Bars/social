@@ -1,6 +1,9 @@
 .usersMainContainer{
     margin: 15px;
     max-width: 900px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .styleUser {
@@ -8,6 +11,20 @@
     background-color: aquamarine;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    border: 1px solid red;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    width: 350px;
+}
+
+.statusUser {
+    overflow: hidden;
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     border: 1px solid red;
     margin: 20px;
     padding: 20px;
