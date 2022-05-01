@@ -8,6 +8,7 @@ import s from './Profile.module.css'
 
 type PropsType = {
     profile: null | ProfileType,
+    updateStatusTC: (status: string)=> void
 }
 
 const Profile =(props: PropsType)=>{
@@ -18,7 +19,7 @@ const Profile =(props: PropsType)=>{
 
     return(
         <div className={s.profileMainContainer}>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} updateStatusTC={props.updateStatusTC}/>
             <MyPostsContainer />
         </div>
     )

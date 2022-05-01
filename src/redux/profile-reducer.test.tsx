@@ -13,7 +13,8 @@ beforeEach(()=>{
             {id: 4, message: "Kabzda kak prosto!!", likesCount: 7},
         ],
         profile: null,
-        newPostText: 'it-incubator'
+        newPostText: 'it-incubator',
+        status: ''
     }
 })
 

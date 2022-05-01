@@ -1,17 +1,9 @@
-import  {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
+import {addPostActionCreator, setStatusAC, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
 import {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
 import {
     toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching, toggleFollowingProgress
 } from "./userReducer";
 import {setUserDataAC} from "./auth-reducer";
-
-/*
-let rerenderEntireTree = (state: typeof store.getState) => {
-
-} // переименуем в callSubscriber
-
-*/
-
 
 export type PostType = {
     id: number
@@ -37,6 +29,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     profile: null | ProfileType
     newPostText: string
+    status: string
 }
 
 export type ProfileType = {    // как правильно протипизировать???
@@ -117,7 +110,7 @@ export type StoreType = {
 type ObserverType = (state: StateType) => void
 
 export type ActionTypes =
-    ReturnType<typeof addPostActionCreator>
+      ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof NewMessageTextActionCreator>
     | ReturnType<typeof addNewMessageActionCreator>
@@ -129,6 +122,7 @@ export type ActionTypes =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserDataAC>
     | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof setStatusAC>
 
 
 /*let store: StoreType = {

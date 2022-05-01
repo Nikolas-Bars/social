@@ -5,10 +5,11 @@ import React, {useState} from "react";
 import {ProfileType} from "../../../redux/store";
 import Preloader from "../../Preloader/Preloader";
 import {useParams} from "react-router-dom";
-import ProfileStatus from "../ProfileStatus";
+import {ProfileStatus} from "../ProfileStatus";
 
 type PropsType = {
     profile: null | ProfileType,
+    updateStatusTC: (status: string)=> void
 }
 
 const ProfileInfo = (props: PropsType) => {
@@ -40,7 +41,7 @@ const ProfileInfo = (props: PropsType) => {
                 <img src={Rica}/>
             </div>
 
-            <ProfileStatus />
+            <ProfileStatus updateStatusTC={props.updateStatusTC}/>
 
             <div className={s.descriptionBlock}>
                 <img style={{borderRadius: '20px'}} src={props.profile?.photos.small ? props.profile.photos.small : cat}/>
