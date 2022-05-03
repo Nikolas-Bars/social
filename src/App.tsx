@@ -7,7 +7,7 @@ import {ActionTypes} from "./redux/store";
 import UserContainer from "./Components/Users/UserContainer";
 import ProfileContainers from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
-import Login from "./Components/Login/Login";
+import {Login} from "./Components/Login/Login";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 
