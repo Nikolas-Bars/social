@@ -4,7 +4,6 @@ import cat from "../../../img/cat.png";
 import React, {useState} from "react";
 import {ProfileType} from "../../../redux/store";
 import Preloader from "../../Preloader/Preloader";
-import {useParams} from "react-router-dom";
 import {ProfileStatus} from "../ProfileStatus";
 
 type PropsType = {

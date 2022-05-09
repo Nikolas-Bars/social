@@ -2,7 +2,7 @@ import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {ProfileType} from "../../redux/store";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {Navigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import s from './Profile.module.css'
 
 

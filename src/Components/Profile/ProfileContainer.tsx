@@ -1,6 +1,5 @@
 import React from 'react';
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {getStatusTC, getUserProfileDatatTC, setUserProfile, updateStatusTC} from "../../redux/profile-reducer";
 import {ProfileType} from "../../redux/store";

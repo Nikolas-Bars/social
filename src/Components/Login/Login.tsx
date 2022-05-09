@@ -2,6 +2,10 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {Input} from "../common/FormControls/FormControl";
 import {maxLengthCreator, minLengthCreator, requiredField} from "../../utils/validators";
+import {connect} from "react-redux";
+import {loginTC} from "../../redux/auth-reducer";
+import {GlobalStateType} from "../../redux/redux-store";
+import {Navigate, useNavigate} from "react-router-dom";
 
 export type FormDataType ={
     login: string
@@ -23,7 +27,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field placeholder={'password'} type={'password'} validate={[requiredField, maxLength, minLength]} name={'password'} component={Input}/>
             </div>
             <div>
-                <Field type={'checkbox'} name={'rememberMe'} validate={[requiredField, maxLength, minLength]} component={Input}/>Remember me
+                <Field type={'checkbox'} name={'rememberMe'}  component={Input}/>Remember me
             </div>
             <div>
                 <button>login</button>
@@ -37,11 +41,19 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 const LoginReduxForm = reduxForm<FormDataType>({form: 'LoginForm'})(LoginForm) // остдаем созданную выше компоненту библиотеке redux form
 
 
-export const Login = () => {     // отрисовываем результат
+type LoginPropsType = {
+    loginTC: (email: string, password: string, rememberMe: boolean) => void, isAuth: boolean
+}
+
+const Login = (props: LoginPropsType) => {     // отрисовываем результат
 
     const onSubmit = (formData: FormDataType) =>{
-        console.log(formData)
+        props.loginTC(formData.login, formData.password, formData.rememberMe)
     }
+
+    let navigate = useNavigate()
+
+    {props.isAuth && navigate('/profile')}
 
     return (
         <div style={{fontSize: '30px'}}>
@@ -50,4 +62,13 @@ export const Login = () => {     // отрисовываем результат
         </div>
     );
 };
+
+let mapStateToProps = (state: GlobalStateType) =>{
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+
+export default connect (mapStateToProps, {loginTC})(Login)
 

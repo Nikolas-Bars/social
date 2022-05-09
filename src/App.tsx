@@ -3,12 +3,12 @@ import './App.css';
 import Navbar from "./Components/Navbar/Navbar";
 import {Route, Routes, useParams} from "react-router-dom";
 import {ActionTypes} from "./redux/store";
-
 import UserContainer from "./Components/Users/UserContainer";
 import ProfileContainers from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
-import {Login} from "./Components/Login/Login";
+import Login from "./Components/Login/Login";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+import News from "./Components/News/News";
 
 
 type AppPropsType = {
@@ -35,12 +35,11 @@ const App = (props: AppPropsType) => {
                     <Routes>
                         <Route path={'/dialogs/'} element={<DialogsContainer />}/>
                         <Route path={'/dialogs/:dialogID'} element={<DialogsContainer />}/>
-
                         <Route path={'/users/'} element={<UserContainer />}/>
                         <Route path={'/profile/:userID'} element={<ProfileContainers />}/>
                         <Route path={'/profile/'} element={<ProfileContainers />}/>
                         <Route path={'/login/'} element={<Login />}/>
-
+                        <Route path={'/news/'} element={<News />}/>
                     </Routes>
 
                 </div>
