@@ -3,7 +3,6 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../Api/api";
 
 const ADD_POST = "ADD-POST"
-const UPDATE_TEXT = "UPDATE-TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 
@@ -16,10 +15,8 @@ let initialState = {
         {id: 4, message: "Kabzda kak prosto!!", likesCount: 7},
     ],
     profile: null,
-    newPostText: 'it-incubator',
     status: 'Place for status'
 }
-
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
 
@@ -30,17 +27,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
                 ...state,
                 posts: [...state.posts, {
                     id: state.posts.length + 1,
-                    message: state.newPostText,
-                    likesCount: 14
+                    message: action.newPostText,
+                    likesCount: 0
                 }],
                 newPostText: ''
-            }
-
-
-        case "UPDATE-TEXT":
-            return {
-                ...state,
-                newPostText: action.text
             }
         case "SET_USER_PROFILE":
             return {
@@ -56,28 +46,9 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
         default:
             return state
     }
-
-
-    /*   if (action.type === 'ADD-POST') {
-           let newPost = {
-               id: state.posts.length + 1,
-               message: state.newPostText,
-               likesCount: 14
-           }
-           state.posts.push(newPost)
-           state.newPostText = "";
-
-       } else if (action.type === "UPDATE-TEXT") {
-           state.newPostText = action.text;
-
-       }*/
-
-
 }
 
-export let addPostActionCreator = () => ({type: ADD_POST} as const)
-
-export let updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_TEXT, text: text} as const)
+export let addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
 
 export const setUserProfile = (profile: ProfileType | null) => ({type: SET_USER_PROFILE, profile} as const)
 

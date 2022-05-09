@@ -4,7 +4,6 @@ import icon3 from "../img/iconsForDialogs/icon3.jpg";
 import icon4 from "../img/iconsForDialogs/icon4.jpg";
 import icon5 from "../img/iconsForDialogs/icon5.jpg";
 
-const NEW_MESSAGE_TEXT = "NEW_MESSAGE_TEXT"
 const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE"
 
 
@@ -12,7 +11,6 @@ const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE"
 
 let initialState2 = {
 
-    newMessageText: "your message...",
 
     dialogs: [
 
@@ -58,8 +56,39 @@ let initialState2 = {
     ]
 }
 
+const dialogsReducer = (state: DialogsPageType = initialState2, action: ActionTypes) => {
 
-let initialState = {
+    switch (action.type) {
+        case "ADD_NEW_MESSAGE":
+
+            return(
+        {
+                ...state,
+                dialogs: state.dialogs.map(el => el.id === action.dialogID ? {...el, messages: [...el.messages, {
+                        message: action.text,
+                        id: el.messages.length.toString(),
+                        messageRight: !el.messages[el.messages.length - 1].messageRight
+                    }] } : el)})
+
+        default:
+            return state
+    }
+
+    return state
+}
+
+export let addNewMessageActionCreator = (dialogID: string, text: string) => ({type: ADD_NEW_MESSAGE, dialogID, text}as const)
+
+export default dialogsReducer
+
+
+
+
+
+
+
+
+/*let initialState = {
     messages: [
         {message: 'Hi', id: '1', messageRight: false},
         {message: 'Hi bro!', id: '2', messageRight: true},
@@ -76,35 +105,7 @@ let initialState = {
         {name: 'Leha', id: '3', img: icon4},
         {name: 'Viktor', id: '4', img: icon5},
     ]
-}
-
-const dialogsReducer = (state: DialogsPageType = initialState2, action: ActionTypes) => {
-
-    switch (action.type) {
-        case "NEW_MESSAGE_TEXT":
-
-            return {
-                ...state, newMessageText: action.newMessage
-            }
-        case "ADD_NEW_MESSAGE":
-
-            return(
-        {
-                ...state,
-                dialogs: state.dialogs.map(el => el.id === action.dialogID ? {...el, messages: [...el.messages, {
-                        message: state.newMessageText,
-                        id: el.messages.length.toString(),
-                        messageRight: !el.messages[el.messages.length - 1].messageRight
-                    }] } : el)})
-
-        default:
-            return state
-    }
-
-
-
-
-
+}*/
 
 /*
     if (action.type === NEW_MESSAGE_TEXT) {
@@ -120,12 +121,3 @@ const dialogsReducer = (state: DialogsPageType = initialState2, action: ActionTy
                 messageRight: !state.messages[state.messages.length - 1].messageRight
             })
     }*/
-
-    return state
-}
-
-export let NewMessageTextActionCreator = (text: string) => ({type: NEW_MESSAGE_TEXT, newMessage: text}as const)
-
-export let addNewMessageActionCreator = (dialogID: string) => ({type: ADD_NEW_MESSAGE, dialogID}as const)
-
-export default dialogsReducer

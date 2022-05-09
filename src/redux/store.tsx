@@ -1,5 +1,5 @@
-import {addPostActionCreator, setStatusAC, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
-import {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
+import {addPostActionCreator, setStatusAC, setUserProfile} from "./profile-reducer";
+import {addNewMessageActionCreator} from "./dialogs-reducer";
 import {
     toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching, toggleFollowingProgress
 } from "./userReducer";
@@ -28,7 +28,6 @@ export type FriendsType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     profile: null | ProfileType
-    newPostText: string
     status: string
 }
 
@@ -58,7 +57,6 @@ export type ProfileType = {    // как правильно протипизир
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
-    newMessageText: string
 }
 export type SideBarFriendsType = {
     friends: Array<FriendsType>
@@ -111,8 +109,6 @@ type ObserverType = (state: StateType) => void
 
 export type ActionTypes =
       ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
-    | ReturnType<typeof NewMessageTextActionCreator>
     | ReturnType<typeof addNewMessageActionCreator>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUsers>

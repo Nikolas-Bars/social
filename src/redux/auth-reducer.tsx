@@ -42,7 +42,7 @@ const authReducer = (state: AuthStateType = initialState, action: ActionTypes): 
 export const authTC = () => (dispatch: Dispatch)=>{
     authAPI.me().then(response => {
         if(response.resultCode === 0){
-            debugger
+
             let {id, email, login} = response.data
             dispatch(setUserDataAC(id, email, login))
         }

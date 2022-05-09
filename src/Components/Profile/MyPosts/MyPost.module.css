@@ -9,12 +9,14 @@
 
 
 .textareaa textarea {
-    border-radius: 40px;
+    border-radius: 20px;
+    min-height: 30px;
     padding: 10px;
+    margin-right: 10px;
     background-color: lightgoldenrodyellow;
 }
 .buttonPost button{
-    border-radius: 40px;
+    border-radius: 10px;
     padding: 10px;
     font-family: "Sitka Banner";
     font-size: 15px;

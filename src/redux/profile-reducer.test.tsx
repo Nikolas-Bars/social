@@ -1,5 +1,5 @@
 import {ActionTypes, ProfilePageType} from "./store";
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+import profileReducer, {addPostActionCreator} from "./profile-reducer";
 
 
 let initialState: ProfilePageType
@@ -13,14 +13,13 @@ beforeEach(()=>{
             {id: 4, message: "Kabzda kak prosto!!", likesCount: 7},
         ],
         profile: null,
-        newPostText: 'it-incubator',
         status: ''
     }
 })
 
 test('new post should be added', ()=>{
 
-    let endState = profileReducer(initialState, addPostActionCreator())
+    let endState = profileReducer(initialState, addPostActionCreator('it-incubator'))
 
     expect(endState.posts.length).toBe(5)
     expect(endState.posts[4].message).toBe('it-incubator')
@@ -28,12 +27,3 @@ test('new post should be added', ()=>{
 
 })
 
-test('newPostText should be changed', ()=>{
-
-    let endState = profileReducer(initialState, updateNewPostTextActionCreator('newText'))
-
-    expect(endState.newPostText).toBe('newText')
-
-
-
-})

@@ -3,7 +3,7 @@ import icon2 from "../img/iconsForDialogs/icon2.jpg";
 import icon3 from "../img/iconsForDialogs/icon3.jpg";
 import icon4 from "../img/iconsForDialogs/icon4.jpg";
 import icon5 from "../img/iconsForDialogs/icon5.jpg";
-import dialogsReducer, {addNewMessageActionCreator, NewMessageTextActionCreator} from "./dialogs-reducer";
+import dialogsReducer, {addNewMessageActionCreator} from "./dialogs-reducer";
 
 test('new message should be added', ()=>{
 /*

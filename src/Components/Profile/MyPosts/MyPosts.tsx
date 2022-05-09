@@ -1,32 +1,21 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React from "react";
 import Post from "./Post/Post";
 import s from './MyPost.module.css'
-import {ActionTypes, PostType, ProfilePageType,} from "../../../redux/store";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
+import {ProfilePageType,} from "../../../redux/store";
+import {MyPostForm} from "./MyPostForm";
 
-type PropsType ={
-    addPost:()=>void
-    onPostChange:(event: ChangeEvent<HTMLTextAreaElement>)=>void
-        newPostText: string
+type PropsType = {
+    addPost:(newPostText: string)=>void
     profilePage: ProfilePageType
 }
-/*    addPost: ()=>void
-    upText: (text: string)=>void*/
-
-
-
 
 const MyPosts = (props: PropsType) => {
 
 
-    const addPost =()=>{
-        if(props.newPostText.trim() !== ''){
-        props.addPost()
+    const addPost =(newPostText: string)=>{
+        if(newPostText.trim() !== ''){
+        props.addPost(newPostText)
     }}
-
-    const onPostChange =(event: ChangeEvent<HTMLTextAreaElement>)=>{
-        props.onPostChange(event)
-    }
 
     let postsElement = props.profilePage.posts.map(post => {
 
@@ -37,11 +26,8 @@ const MyPosts = (props: PropsType) => {
         <div className={s.postsBlock}>
             <h3>My Posts</h3>
             <div className={s.myposts}>
-                <div className={s.textareaa}>
-                    <textarea  onChange={onPostChange} value={props.newPostText} />
-                </div>
-                <div className={s.buttonPost}>
-                    <button onClick={addPost}>Добавить пост</button>
+                <div className={`${s.textareaa} ${s.buttonPost}`}>
+                    <MyPostForm addPost={addPost}/>
                 </div>
             </div>
             <div>
