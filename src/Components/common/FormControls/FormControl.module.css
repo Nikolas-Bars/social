@@ -11,4 +11,7 @@
 .error span {
     color: red;
 }
+.summuryError {
+    border: 2px solid red;
+}
 

@@ -17,6 +17,7 @@ type MapDispatchToPropsType = {
     getUserProfileDatatTC: (userID: number) => void
     getStatusTC: (userID: number)=> void
     updateStatusTC: (status: string)=> void
+    authorizedUserID: number
 }
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType & { router: any }
@@ -28,7 +29,7 @@ class ProfileContainer extends React.Component<PropsType> {
         let userID: number = this.props.router.params.userID
 
         if (!userID) {
-            userID = 22911
+            userID = this.props.authorizedUserID
         }
 
         this.props.getUserProfileDatatTC(userID)
@@ -49,7 +50,8 @@ class ProfileContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (state: GlobalStateType) => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        authorizedUserID: state.auth.id
     }
 
 }

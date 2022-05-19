@@ -3,7 +3,7 @@ import {addNewMessageActionCreator} from "./dialogs-reducer";
 import {
     toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching, toggleFollowingProgress
 } from "./userReducer";
-import {setUserDataAC} from "./auth-reducer";
+import {setAuthUserDataAC} from "./auth-reducer";
 
 export type PostType = {
     id: number
@@ -116,7 +116,7 @@ export type ActionTypes =
     | ReturnType<typeof setTotalUserCount>
     | ReturnType<typeof toggleFollow>
     | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setUserDataAC>
+    | ReturnType<typeof setAuthUserDataAC>
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatusAC>
 
