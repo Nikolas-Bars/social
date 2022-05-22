@@ -15,6 +15,14 @@ import Preloader from "../Preloader/Preloader";
 import Users from "./Users";
 import WithAuthRedirect from "../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFolliwingProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "./Users-selector";
 
 type PropsType = {
     users: Array<UsersType>
@@ -66,16 +74,28 @@ class UsersContain extends React.Component<PropsType> {
 
 
 
+// let mapStateToProps = (state: StateType) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.count,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         folliwingProgress: state.usersPage.folliwingProgress,
+//     }
+// }
+
 let mapStateToProps = (state: StateType) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.count,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        folliwingProgress: state.usersPage.folliwingProgress,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        folliwingProgress: getFolliwingProgress(state),
     }
 }
+
 
 let UsersContainer = compose(
     connect(mapStateToProps, {
