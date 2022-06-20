@@ -5,7 +5,7 @@ import {maxLengthCreator, minLengthCreator, requiredField} from "../../utils/val
 import {connect} from "react-redux";
 import {loginTC} from "../../redux/auth-reducer";
 import {GlobalStateType} from "../../redux/redux-store";
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import s from './../common/FormControls/FormControl.module.css'
 
 export type FormDataType ={
@@ -17,10 +17,10 @@ export type FormDataType ={
 let maxLength = maxLengthCreator(40)
 let minLength = minLengthCreator(4)
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     ///создаем простую форму только вместо input используе Field
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field placeholder={'login'} name={'login'} validate={[requiredField, maxLength, minLength]} component={Input}/>
             </div>
@@ -30,8 +30,8 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <Field type={'checkbox'} name={'rememberMe'}  component={Input}/>Remember me
             </div>
-            <div className={props.error ? s.summuryError: ''}>
-                {props.error}
+            <div className={error ? s.summuryError: ''}>
+                {error}
             </div>
             <div>
                 <button>login</button>

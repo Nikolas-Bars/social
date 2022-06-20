@@ -8,7 +8,7 @@ import {ProfileStatus} from "../ProfileStatus";
 
 type PropsType = {
     profile: null | ProfileType,
-    updateStatusTC: (status: string)=> void
+    updateStatusTC: (status: string) => void
 }
 
 const ProfileInfo = (props: PropsType) => {
@@ -26,12 +26,7 @@ const ProfileInfo = (props: PropsType) => {
         borderRadius: '5px',
         fontFamily: 'URW Chancery L, cursive',
         margin: '5px',
-
-
     }
-
-
-
 
     return (
         <div className={s.content}>
@@ -43,32 +38,36 @@ const ProfileInfo = (props: PropsType) => {
             <ProfileStatus updateStatusTC={props.updateStatusTC}/>
 
             <div className={s.descriptionBlock}>
-                <img style={{borderRadius: '20px'}} src={props.profile?.photos.small ? props.profile.photos.small : cat}/>
+                <img style={{borderRadius: '20px'}}
+                     src={props.profile?.photos.small ? props.profile.photos.small : cat}/>
                 Ava + discription
             </div>
 
-
             <button onClick={() => {
-            setToggleContacts(!toggleContacts)
-        }}>
-            Контакты
-        </button>
+                setToggleContacts(!toggleContacts)
+            }}>
+                Контакты
+            </button>
 
             {toggleContacts &&
             <div style={{display: "flex", flexDirection: "column", alignItems: 'flex-start'}}>
-                {props.profile.contacts.facebook && <div style={styleContactItem}>Facebook: {props.profile.contacts.facebook}</div>}
-                {props.profile.contacts.website && <div style={styleContactItem}>Мой сайт: {props.profile.contacts.website}</div>}
+                {props.profile.contacts.facebook &&
+                <div style={styleContactItem}>Facebook: {props.profile.contacts.facebook}</div>}
+                {props.profile.contacts.website &&
+                <div style={styleContactItem}>Мой сайт: {props.profile.contacts.website}</div>}
                 {props.profile.contacts.vk && <div style={styleContactItem}>ВК: {props.profile.contacts.vk}</div>}
-                {props.profile.contacts.twitter && <div style={styleContactItem}>Twitter: {props.profile.contacts.twitter}</div>}
-                {props.profile.contacts.instagram && <div style={styleContactItem}>Instagram: {props.profile.contacts.instagram}</div>}
-                {props.profile.contacts.youtube && <div style={styleContactItem}>Youtube: {props.profile.contacts.youtube}</div>}
-                {props.profile.contacts.github && <div style={styleContactItem}>GitHub: {props.profile.contacts.github}</div>}
-                {props.profile.contacts.mainLink && <div style={styleContactItem}>MainLink : {props.profile.contacts.mainLink}</div>}
+                {props.profile.contacts.twitter &&
+                <div style={styleContactItem}>Twitter: {props.profile.contacts.twitter}</div>}
+                {props.profile.contacts.instagram &&
+                <div style={styleContactItem}>Instagram: {props.profile.contacts.instagram}</div>}
+                {props.profile.contacts.youtube &&
+                <div style={styleContactItem}>Youtube: {props.profile.contacts.youtube}</div>}
+                {props.profile.contacts.github &&
+                <div style={styleContactItem}>GitHub: {props.profile.contacts.github}</div>}
+                {props.profile.contacts.mainLink &&
+                <div style={styleContactItem}>MainLink : {props.profile.contacts.mainLink}</div>}
             </div>
-
-
             }
-
         </div>
     )
 }

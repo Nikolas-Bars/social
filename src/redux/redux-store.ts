@@ -25,6 +25,8 @@ export type GlobalStateType = ReturnType<typeof reducers>
 let store = createStore(reducers, applyMiddleware(thunkApplyMiddleware))
 
 
+
+
 // @ts-ignore
 window.store = store
 

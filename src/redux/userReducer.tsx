@@ -2,7 +2,6 @@ import {ActionTypes, usersPageType, UsersType} from "./store";
 import {Dispatch} from "redux";
 import {usersAPI} from "../Api/api";
 
-
 const TOGGLE = 'TOGGLE' // меняет статус follow у user
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
@@ -23,18 +22,14 @@ let initialState = {
 const userReducer = (state:usersPageType = initialState, action: ActionTypes) => {
     switch(action.type) {
         case 'TOGGLE':
-
             return {
                 ...state,
-
                 users: state.users.map(el => el.id === action.id ? {...el, followed: !el.followed} : el)
             }
         case 'SET_USERS':
-
             return {
                 ...state,
                 users: action.users,
-
             }
         case "SET_CURRENT_PAGE":
             return {
@@ -72,33 +67,27 @@ export const setTotalUserCount =(count: number)=> ({type: SET_TOTAL_USER_COUNT, 
 export const toggleIsFetching =(isFetching: boolean)=> ({type: TOGGLE_IS_FETCHING, isFetching}as const)
 export const toggleFollowingProgress =(isFetching: boolean, id: number)=>({type: TOGGLE_FOLLOWING_PROGRESS, isFetching, id}) as const
 
-export const getUsersTC =(currentPage: number, pageSize:number)=> (dispatch: Dispatch)=>{
+export const getUsersTC =(currentPage: number, pageSize:number)=> async (dispatch: Dispatch)=>{
     dispatch(toggleIsFetching(true))
-    usersAPI.getUsers(currentPage, pageSize).then(data =>{
+    let data = await usersAPI.getUsers(currentPage, pageSize)
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
         dispatch(setTotalUserCount(data.totalCount))
-    })
 }
 
-export const followTC = (userID: number) => (dispatch: Dispatch) =>{
+export const followTC = (userID: number) => async (dispatch: Dispatch) =>{
     dispatch(toggleFollowingProgress(true, userID))// для контроля за переключением disable  на кнопке "подписаться"
-    usersAPI.unFollowUsers(userID).then(resultCode => {
-            if (resultCode === 0) {
+    let resultCode = await usersAPI.unFollowUsers(userID)
+        if (resultCode === 0) {
                dispatch(toggleFollow(userID)) // // меняет статус follow у user
             }dispatch(toggleFollowingProgress(false, userID)) // // для контроля за переключением disable  на кнопке "подписаться"
-        }
-    )
 }
 
 
-export const unFollowTC = (userID: number) => (dispatch: Dispatch) =>{
+export const unFollowTC = (userID: number) => async (dispatch: Dispatch) =>{
     dispatch(toggleFollowingProgress(true, userID))// для контроля за переключением disable  на кнопке "подписаться"
-    usersAPI.followUsers(userID).then(resultCode => {
+    let resultCode = await usersAPI.followUsers(userID)
             if (resultCode === 0) {
                dispatch(toggleFollow(userID))
-
             } dispatch(toggleFollowingProgress(false, userID))// для контроля за переключением disable  на кнопке "подписаться"
-        }
-    )
 }

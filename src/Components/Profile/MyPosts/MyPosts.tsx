@@ -9,7 +9,7 @@ type PropsType = {
     profilePage: ProfilePageType
 }
 
-const MyPosts = (props: PropsType) => {
+const MyPosts = React.memo((props: PropsType) => {
 
 
     const addPost =(newPostText: string)=>{
@@ -19,7 +19,7 @@ const MyPosts = (props: PropsType) => {
 
     let postsElement = props.profilePage.posts.map(post => {
 
-        return <Post message={post.message} likesCount={post.likesCount} key={post.id}/>
+        return <Post message={post.message} postID={post.id} likesCount={post.likesCount} key={post.id}/>
     }).reverse()
 
     return (
@@ -35,6 +35,6 @@ const MyPosts = (props: PropsType) => {
             </div>
         </div>
     )
-}
+})
 
 export default MyPosts

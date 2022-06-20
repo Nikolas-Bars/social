@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import Navbar from "./Components/Navbar/Navbar";
-import {Route, Routes, useParams} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {ActionTypes} from "./redux/store";
 import UserContainer from "./Components/Users/UserContainer";
 import ProfileContainers from "./Components/Profile/ProfileContainer";
@@ -14,13 +14,10 @@ import {GlobalStateType} from "./redux/redux-store";
 import {initializedAppTC} from "./redux/app-reducer";
 import Preloader from "./Components/Preloader/Preloader";
 
-
 type AppPropsType = {
-    dispatch: (action: ActionTypes)=>void
+    dispatch: (action: ActionTypes) => void
     store: any
 }
-
-
 
 const App = (props: AppPropsType) => {
 
@@ -30,45 +27,43 @@ const App = (props: AppPropsType) => {
 
     const initialized = useSelector<GlobalStateType>(state => state.app.initialized)
 
-
-
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(initializedAppTC())
     }, [])
 
-    if(!initialized){
-        return <div className={"preloader"}><Preloader /></div>
+    if (!initialized) {
+        return <div className={"preloader"}><Preloader/></div>
     }
 
-    if(!isAuth){
+    if (!isAuth) {
         return <div className={"container"}><Login/></div>
     }
 
     return (
-            <div className={"app-wrapper"}>
+        <div className={"app-wrapper"}>
 
-        <div>
+            <div>
                 <HeaderContainer/>
 
                 <div className={"container"}>
-                <Navbar state={props.store.getState().sideBarFriends}/>
+                    <Navbar state={props.store.getState().sideBarFriends}/>
 
-                <div className={'mainContent'}>
-                    <Routes>
-                        <Route path={'/dialogs/'} element={<DialogsContainer />}/>
-                        <Route path={'/dialogs/:dialogID'} element={<DialogsContainer />}/>
-                        <Route path={'/users/'} element={<UserContainer />}/>
-                        <Route path={'/profile/:userID'} element={<ProfileContainers />}/>
-                        <Route path={'/'} element={<ProfileContainers />}/>
-                        <Route path={'/profile/'} element={<ProfileContainers />}/>
-                        <Route path={'/login/'} element={<Login />}/>
-                        <Route path={'/news/'} element={<News />}/>
-                    </Routes>
+                    <div className={'mainContent'}>
+                        <Routes>
+                            <Route path={'/dialogs/'} element={<DialogsContainer/>}/>
+                            <Route path={'/dialogs/:dialogID'} element={<DialogsContainer/>}/>
+                            <Route path={'/users/'} element={<UserContainer/>}/>
+                            <Route path={'/profile/:userID'} element={<ProfileContainers/>}/>
+                            <Route path={'/'} element={<ProfileContainers/>}/>
+                            <Route path={'/profile/'} element={<ProfileContainers/>}/>
+                            <Route path={'/login/'} element={<Login/>}/>
+                            <Route path={'/news/'} element={<News/>}/>
+                        </Routes>
+                    </div>
                 </div>
-                      </div>
             </div>
 
-            </div>
+        </div>
 
     );
 }

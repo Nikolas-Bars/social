@@ -1,4 +1,4 @@
-import {addPostActionCreator, setStatusAC, setUserProfile} from "./profile-reducer";
+import {addPostActionCreator, deletePostActionCreator, setStatusAC, setUserProfile} from "./profile-reducer";
 import {addNewMessageActionCreator} from "./dialogs-reducer";
 import {
     toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching, toggleFollowingProgress
@@ -119,6 +119,7 @@ export type ActionTypes =
     | ReturnType<typeof setAuthUserDataAC>
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatusAC>
+    | ReturnType<typeof deletePostActionCreator>
 
 
 /*let store: StoreType = {

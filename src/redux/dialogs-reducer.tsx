@@ -6,11 +6,7 @@ import icon5 from "../img/iconsForDialogs/icon5.jpg";
 
 const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE"
 
-
-
-
 let initialState2 = {
-
 
     dialogs: [
 
