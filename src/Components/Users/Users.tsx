@@ -2,6 +2,7 @@ import React from 'react';
 import {UsersType} from "../../redux/store";
 import s from './Users.module.css'
 import User from "./User";
+import Paginator from "../../Paginator/Paginator";
 
 type PropsType = {
     users: Array<UsersType>
@@ -17,31 +18,17 @@ type PropsType = {
 
 const Users = (props: PropsType) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let pages = []
-
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-
     let styleUserBlock = {
         display: 'flex', justifyContent: "space-around", flexDirection: "column", flexWrap: 'wrap'
-    } as const
-
-    let styleButton = {
-        active: {color: "gold", backgroundColor: 'blue', borderRadius: '5px', padding: '5px',},
-        noactive: {color: "white", backgroundColor: 'black', borderRadius: '5px', padding: '5px',}
     } as const
 
     return (
 
         <div className={s.usersMainContainer}>
 
-            {pages.map(el => <button key={el} onClick={() => {
-                props.onClick(el)
-            }} style={props.currentPage === el ? styleButton.active : styleButton.noactive}>{el}</button>)}
-
             <div style={styleUserBlock}>
+
+                <Paginator currentPage={props.currentPage} portionSize={5} pageSize={props.pageSize} totalItemsCount={props.totalUsersCount}/>
 
                 {props.users.map(el => {
                     return (
@@ -57,6 +44,7 @@ const Users = (props: PropsType) => {
                     )
                 })}
             </div>
+            <Paginator currentPage={props.currentPage} portionSize={5} pageSize={props.pageSize} totalItemsCount={props.totalUsersCount}/>
         </div>
     );
 };

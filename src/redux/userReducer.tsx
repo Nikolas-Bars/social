@@ -72,6 +72,7 @@ export const getUsersTC =(currentPage: number, pageSize:number)=> async (dispatc
     let data = await usersAPI.getUsers(currentPage, pageSize)
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
+    dispatch(setCurrentPage(currentPage))
         dispatch(setTotalUserCount(data.totalCount))
 }
 
