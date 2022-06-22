@@ -1,4 +1,5 @@
 import profileReducer, {addPostActionCreator, deletePostActionCreator} from "../redux/profile-reducer";
+import {ProfileType} from "../redux/store";
 
 
 
@@ -13,8 +14,9 @@ it('length of new state should be 5',()=>{
             {id: 3, message: "Post", likesCount: 454},
             {id: 4, message: "Kabzda kak prosto!!", likesCount: 7},
         ],
-        profile: null,
-        status: 'Place for status'
+        profile: {}as ProfileType,
+        status: 'Place for status',
+        error: null
     }
 
     let newState = profileReducer(startState, action)
@@ -33,8 +35,9 @@ it('new message of new porst should be correct',()=>{
             {id: 3, message: "Post", likesCount: 454},
             {id: 4, message: "Kabzda kak prosto!!", likesCount: 7},
         ],
-        profile: null,
-        status: 'Place for status'
+        profile: {}as ProfileType,
+        status: 'Place for status',
+        error: null
     }
 
     let newState = profileReducer(startState, action)
@@ -53,8 +56,9 @@ it('post should be deleted',()=>{
             {id: 3, message: "Post", likesCount: 454},
             {id: 4, message: "Kabzda kak prosto!!", likesCount: 7},
         ],
-        profile: null,
-        status: 'Place for status'
+        profile: {}as ProfileType,
+        status: 'Place for status',
+        error: null
     }
 
     let newState = profileReducer(startState, action)

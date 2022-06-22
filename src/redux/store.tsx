@@ -1,9 +1,9 @@
 import {
     addPostActionCreator,
     deletePostActionCreator,
-    savePhotoAC,
+    savePhotoAC, setErrorAC,
     setStatusAC,
-    setUserProfile
+    setUserProfile, updateProfileAC
 } from "./profile-reducer";
 import {addNewMessageActionCreator} from "./dialogs-reducer";
 import {
@@ -33,28 +33,27 @@ export type FriendsType = {
 }
 export type ProfilePageType = {
     posts: Array<PostType>
-    profile: null | ProfileType
+    profile: ProfileType
     status: string
 }
 
 export type ProfileType = {    // как правильно протипизировать???
-    "aboutMe": null | string,
+    "aboutMe": string,
     "contacts": {
-        'dqwd': string  // почему ts не ругается когда приходит response без этого св-ва????
-        "facebook": null | string,
-        "website": null | string,
-        "vk": null | string,
-        "twitter": null | string,
-        "instagram": null | string,
-        "youtube": null | string,
-        "github": null | string,
-        "mainLink": null | string
+        "facebook": string,
+        "website": string,
+        "vk": string,
+        "twitter": string,
+        "instagram": string,
+        "youtube": string,
+        "github": string,
+        "mainLink": string
     },
     "lookingForAJob": boolean,
-    "lookingForAJobDescription": null | boolean,
-    "fullName": null | string,
+    "lookingForAJobDescription": boolean,
+    "fullName": string,
     "userId": number,
-    "photos": PhotosType
+    "photos": PhotosType | null
 }
 
 export type PhotosType = {
@@ -128,6 +127,8 @@ export type ActionTypes =
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof deletePostActionCreator>
     | ReturnType<typeof savePhotoAC>
+    | ReturnType<typeof updateProfileAC>
+    | ReturnType<typeof setErrorAC>
 
 
 /*let store: StoreType = {

@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {PhotosType} from "../redux/store";
+import {PhotosType, ProfileType} from "../redux/store";
 
 let baseUrl = 'https://social-network.samuraijs.com/api/1.0'
 
@@ -49,6 +49,27 @@ export const profileAPI = {
         const formData = new FormData()
         formData.append('image', file)
         return instance.put<{}, AxiosResponse<{data:{photos: PhotosType}}>>(`/profile/photo`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
+    },
+    updateProfile(data: ProfileType){
+        return instance.put<{}, AxiosResponse<{resultCode: number, messages: string, data: {}}>>('/profile', data)
     }
 }
 
+// export type RequestDataForUpdate = {
+//     "aboutMe": string,
+//     userId: number
+//     lookingForAJob: boolean
+//     lookingForAJobDescription: boolean
+//     fullName: string
+//     "photos": PhotosType | null
+//     contacts: {
+//         github: string
+//         vk: string
+//         facebook: string
+//         instagram: string
+//         twitter: string
+//         website: string
+//         youtube: string
+//         mainLink: string
+//     }
+// }

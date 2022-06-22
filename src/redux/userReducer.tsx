@@ -87,8 +87,9 @@ export const followTC = (userID: number) => async (dispatch: Dispatch) =>{
 
 export const unFollowTC = (userID: number) => async (dispatch: Dispatch) =>{
     dispatch(toggleFollowingProgress(true, userID))// для контроля за переключением disable  на кнопке "подписаться"
-    let resultCode = await usersAPI.followUsers(userID)
-            if (resultCode === 0) {
-               dispatch(toggleFollow(userID))
-            } dispatch(toggleFollowingProgress(false, userID))// для контроля за переключением disable  на кнопке "подписаться"
+        let resultCode = await usersAPI.followUsers(userID)
+        if (resultCode === 0) {
+            dispatch(toggleFollow(userID))
+        } dispatch(toggleFollowingProgress(false, userID))// для контроля за переключением disable  на кнопке "подписаться"
+
 }

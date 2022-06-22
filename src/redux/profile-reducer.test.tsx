@@ -1,8 +1,8 @@
-import {ActionTypes, ProfilePageType} from "./store";
-import profileReducer, {addPostActionCreator} from "./profile-reducer";
+import {ProfileType} from "./store";
+import profileReducer, {addPostActionCreator, ProfileStateType} from "./profile-reducer";
 
 
-let initialState: ProfilePageType
+let initialState: ProfileStateType
 
 beforeEach(()=>{
     initialState = {
@@ -12,8 +12,9 @@ beforeEach(()=>{
             {id: 3, message: "Post", likesCount: 454},
             {id: 4, message: "Kabzda kak prosto!!", likesCount: 7},
         ],
-        profile: null,
-        status: ''
+        profile: {}as ProfileType,
+        status: '',
+        error: null
     }
 })
 
