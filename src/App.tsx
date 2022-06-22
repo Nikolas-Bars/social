@@ -1,18 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {Suspense, useEffect} from 'react';
 import './App.css';
 import Navbar from "./Components/Navbar/Navbar";
-import {Route, Routes} from "react-router-dom";
+import {Route, Router, Routes} from "react-router-dom";
 import {ActionTypes} from "./redux/store";
 import UserContainer from "./Components/Users/UserContainer";
 import ProfileContainers from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
-import News from "./Components/News/News";
 import {useDispatch, useSelector} from "react-redux";
 import {GlobalStateType} from "./redux/redux-store";
 import {initializedAppTC} from "./redux/app-reducer";
 import Preloader from "./Components/Preloader/Preloader";
+import { lazy } from 'react';
+
+
+const News = lazy(() => import("./Components/News/News"))
 
 type AppPropsType = {
     dispatch: (action: ActionTypes) => void
@@ -49,6 +52,7 @@ const App = (props: AppPropsType) => {
                     <Navbar state={props.store.getState().sideBarFriends}/>
 
                     <div className={'mainContent'}>
+
                         <Routes>
                             <Route path={'/dialogs/'} element={<DialogsContainer/>}/>
                             <Route path={'/dialogs/:dialogID'} element={<DialogsContainer/>}/>
@@ -57,7 +61,7 @@ const App = (props: AppPropsType) => {
                             <Route path={'/'} element={<ProfileContainers/>}/>
                             <Route path={'/profile/'} element={<ProfileContainers/>}/>
                             <Route path={'/login/'} element={<Login/>}/>
-                            <Route path={'/news/'} element={<News/>}/>
+                            <Route path={'/news/'} element={<Suspense fallback={<Preloader/>}><News/></Suspense>}/>
                         </Routes>
                     </div>
                 </div>

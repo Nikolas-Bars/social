@@ -2,17 +2,17 @@ import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 import App from "./App";
 import store from "./redux/redux-store"
 import {Provider} from "react-redux";
 
 ReactDOM.render(
-    <BrowserRouter>
+    <HashRouter>
         <Provider store={store}>
             <App store={store} dispatch={store.dispatch.bind(store)}/>
         </Provider>
-    </BrowserRouter>,
+    </HashRouter>,
     document.getElementById('root')
 );
 

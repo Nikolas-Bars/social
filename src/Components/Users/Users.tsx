@@ -40,7 +40,6 @@ const Users = (props: PropsType) => {
                                                followTC={props.followTC}
                                                unFollowTC={props.unFollowTC}
                                                name={el.name}/></div>
-
                     )
                 })}
             </div>

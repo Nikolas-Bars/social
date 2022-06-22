@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch} from "react-redux";
 import {loginTC} from "../../redux/auth-reducer";
 
-const News = () => {
+const News: React.FC = ():JSX.Element =>  {
 
     const dispatch = useDispatch()
 
