@@ -1,10 +1,15 @@
 import s from "./ProfileInfo.module.css";
 import Rica from "../../../img/top.png";
 import cat from "../../../img/cat.png";
-import React, {useState} from "react";
+import React, {MouseEventHandler, useState} from "react";
 import {ProfileType} from "../../../redux/store";
 import Preloader from "../../Preloader/Preloader";
 import {ProfileStatus} from "../ProfileStatus";
+import {useDispatch, useSelector} from "react-redux";
+import {GlobalStateType} from "../../../redux/redux-store";
+import {useParams} from "react-router-dom";
+import {Dispatch} from "redux";
+import {savePhotoTC} from "../../../redux/profile-reducer";
 
 type PropsType = {
     profile: null | ProfileType,
@@ -14,6 +19,16 @@ type PropsType = {
 const ProfileInfo = (props: PropsType) => {
 
     let [toggleContacts, setToggleContacts] = useState<boolean>(false)
+
+    let myId = useSelector<GlobalStateType, number | null>(state => state.auth.id)
+
+    let photos = useSelector<GlobalStateType, { small: string | null, large: string | null } | null>(state => {
+        return state.profilePage.profile && state.profilePage.profile.photos
+    })
+
+    const dispatch = useDispatch<Dispatch<any>>()
+
+    const {userID} = useParams<'userID'>()
 
     if (!props.profile) {
         return <Preloader/>
@@ -28,6 +43,12 @@ const ProfileInfo = (props: PropsType) => {
         margin: '5px',
     }
 
+    const updateAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            dispatch(savePhotoTC(e.target.files[0]))
+        }
+    }
+
     return (
         <div className={s.content}>
 
@@ -39,8 +60,10 @@ const ProfileInfo = (props: PropsType) => {
 
             <div className={s.descriptionBlock}>
                 <img style={{borderRadius: '20px'}}
-                     src={props.profile?.photos.small ? props.profile.photos.small : cat}/>
-                Ava + discription
+                     src={photos && photos.small ? photos.small : cat}/>
+                Ava + discription {myId} {userID ? null : <input type={'file'} onChange={(e) => {
+                updateAvatar(e)
+            }}/>}
             </div>
 
             <button onClick={() => {

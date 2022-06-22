@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "homepage": "https://nikolas-bars.github.io/social/",
   "private": true,
+  "resolutions": { "mini-css-extract-plugin": "2.4.5" },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",

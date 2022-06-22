@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
+import {PhotosType} from "../redux/store";
 
 let baseUrl = 'https://social-network.samuraijs.com/api/1.0'
 
@@ -44,5 +45,10 @@ export const profileAPI = {
     updateStatus:(status: string)=>{
         return instance.put(`/profile/status`, {status}).then(response => response)
     },
+    savePhoto(file: any){
+        const formData = new FormData()
+        formData.append('image', file)
+        return instance.put<{}, AxiosResponse<{data:{photos: PhotosType}}>>(`/profile/photo`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
+    }
 }
 

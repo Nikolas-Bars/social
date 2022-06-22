@@ -49,8 +49,8 @@ class ProfileContainer extends React.Component<PropsType> {
 
 
 const mapStateToProps = (state: GlobalStateType) => {
-    return {
-        profile: state.profilePage.profile,
+    // @ts-ignore
+    return {        profile: state.profilePage.profile,
         authorizedUserID: state.auth.id
     }
 

@@ -1,4 +1,10 @@
-import {addPostActionCreator, deletePostActionCreator, setStatusAC, setUserProfile} from "./profile-reducer";
+import {
+    addPostActionCreator,
+    deletePostActionCreator,
+    savePhotoAC,
+    setStatusAC,
+    setUserProfile
+} from "./profile-reducer";
 import {addNewMessageActionCreator} from "./dialogs-reducer";
 import {
     toggleFollow, setUsers, setCurrentPage, setTotalUserCount, toggleIsFetching, toggleFollowingProgress
@@ -48,12 +54,13 @@ export type ProfileType = {    // как правильно протипизир
     "lookingForAJobDescription": null | boolean,
     "fullName": null | string,
     "userId": number,
-    "photos": {
-        "small": null | string,
-        "large": null | string
-    }
+    "photos": PhotosType
 }
 
+export type PhotosType = {
+    "small": null | string,
+    "large": null | string
+}
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
@@ -120,6 +127,7 @@ export type ActionTypes =
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof deletePostActionCreator>
+    | ReturnType<typeof savePhotoAC>
 
 
 /*let store: StoreType = {

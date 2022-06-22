@@ -46,6 +46,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
     debugger
     const response = await authAPI.login(email, password, rememberMe)
     if (response.data.resultCode === 0) {
+        debugger
         dispatch(getAuthUserDataTC())
     } else {
         let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some Error'
