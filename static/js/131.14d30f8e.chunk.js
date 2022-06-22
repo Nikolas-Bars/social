@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmy_app=self.webpackChunkmy_app||[]).push([[131],{6131:function(n,t,i){i.r(t);i(2791);var o=i(7375),a=i(2717),c=i(184);t.default=function(){var n=(0,o.I0)();return(0,c.jsx)("div",{children:(0,c.jsx)("button",{onClick:function(){n((0,a.YJ)("nikolay.prasolov@gmail.com","481516Lost",!0))},children:"login test"})})}}}]);
+//# sourceMappingURL=131.14d30f8e.chunk.js.map
