@@ -14,7 +14,8 @@ beforeEach(()=>{
         ],
         profile: {}as ProfileType,
         status: '',
-        error: null
+        error: null,
+        errorUpdateUserData: null
     }
 })
 

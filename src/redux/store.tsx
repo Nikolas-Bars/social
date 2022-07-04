@@ -1,6 +1,6 @@
 import {
     addPostActionCreator,
-    deletePostActionCreator,
+    deletePostActionCreator, errorUpdateUserDataAC,
     savePhotoAC, setErrorAC,
     setStatusAC,
     setUserProfile, updateProfileAC
@@ -129,6 +129,7 @@ export type ActionTypes =
     | ReturnType<typeof savePhotoAC>
     | ReturnType<typeof updateProfileAC>
     | ReturnType<typeof setErrorAC>
+    | ReturnType<typeof errorUpdateUserDataAC>
 
 
 /*let store: StoreType = {

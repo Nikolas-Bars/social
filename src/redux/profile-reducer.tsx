@@ -7,7 +7,7 @@ const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 const SET_ERROR = 'SET_ERROR'
 
-export type ErrorType = {error: string | null}
+export type ErrorType = {error: string | null, errorUpdateUserData: string | null}
 
 export type ProfileStateType = ProfilePageType & ErrorType
 
@@ -40,7 +40,8 @@ let initialState = {
         }
     },
     error: null,
-    status: 'Place for status'
+    status: 'Place for status',
+    errorUpdateUserData: null
 }
 
 
@@ -85,6 +86,8 @@ const profileReducer = (state: ProfileStateType = initialState, action: ActionTy
                 ...state,
                 error: action.error
             }
+        case "SET_ERROR_UPDATE":
+        return {...state, errorUpdateUserData: action.error}
 
         default:
             return state
@@ -102,6 +105,8 @@ export const setStatusAC = (status: string) => ({type: SET_STATUS, status} as co
 export const savePhotoAC = (photo: PhotosType) => ({type: 'SAVE_PHOTO', photo} as const)
 
 export const updateProfileAC = (profile: ProfileType) => ({type: 'UPDATE_PROFILE', profile} as const)
+
+export const errorUpdateUserDataAC = (error: string | null) => ({type: 'SET_ERROR_UPDATE', error} as const)
 
 export const deletePostActionCreator = (id: number) => ({type: "DELETE_POST", id} as const)
 
@@ -128,7 +133,7 @@ export const savePhotoTC = (file: any) => async (dispatch: Dispatch) => {
 }
 
 
-export const updateProfileTС = (data: ProfileType) => (dispatch: Dispatch<any>) => {
+export const updateProfileTC = (data: ProfileType) => (dispatch: Dispatch) => {
     profileAPI.updateProfile(data)
         .then(res => {
             if (res.data.resultCode === 0) {
@@ -137,7 +142,7 @@ export const updateProfileTС = (data: ProfileType) => (dispatch: Dispatch<any>)
                 console.log(res.data.messages)
                 dispatch(setErrorAC(res.data.messages))
             }
-        }).catch(err => console.log(err))
+        }).catch(err => dispatch(errorUpdateUserDataAC(err)))
 }
 
 

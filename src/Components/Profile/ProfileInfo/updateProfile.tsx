@@ -1,75 +1,101 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
+import {ProfileType} from "../../../redux/store";
+import {updateProfileTC} from "../../../redux/profile-reducer";
+import {useFormik} from "formik";
+import validate = WebAssembly.validate;
 import {GlobalStateType} from "../../../redux/redux-store";
-import {PhotosType, ProfileType} from "../../../redux/store";
-import {Dispatch} from "redux";
-import {updateProfileTС} from "../../../redux/profile-reducer";
 
-export type PropsType = {
-    toggle: ()=> void
-    myId: number | null
+export type UpdateProfilePropsType = {
+    profile: ProfileType
+    editMode: (value: boolean) => void
 }
 
-const UpdateProfile = (props: PropsType) => {
+export const UpdateForm = (props: UpdateProfilePropsType) => {
 
-    const profile = useSelector<GlobalStateType, ProfileType>(state => state.profilePage.profile)
+    const dispatch = useDispatch()
 
-    let error = useSelector<GlobalStateType, string | null>(state => state.profilePage.error)
+    const errorUpdate = useSelector<GlobalStateType, string | null>(state => state.profilePage.errorUpdateUserData)
 
-    const dispatch = useDispatch<Dispatch<any>>()
+    const formik = useFormik({
+        validate: (values) => {
+            if (!values.facebook.includes('.com') && values.facebook != '') {
+                return {
+                    facebook: 'Неверный формат!'
+                }
+            }
+            if (!values.github.includes('.com') && values.github != '') {
+                return {
+                    github: 'Неверный формат!'
+                }
+            }
+        },
+        initialValues: {
+            facebook: props.profile.contacts.facebook,
+            website: props.profile.contacts.website,
+            vk: props.profile.contacts.vk,
+            twitter: props.profile.contacts.twitter,
+            instagram: props.profile.contacts.instagram,
+            youtube: props.profile.contacts.youtube,
+            github: props.profile.contacts.github,
+            mainLink: props.profile.contacts.mainLink
+        },
+        onSubmit(values) {
+            dispatch(updateProfileTC({...props.profile, contacts: values}))
+            props.editMode(false)
+        },
 
-    let photos = useSelector<GlobalStateType, { small: string | null, large: string | null } | null>(state => {
-        return state.profilePage.profile && state.profilePage.profile.photos
     })
 
-    const [facebook, setFacebook] = useState<string>(profile.contacts.facebook || '')
-    const [github, setGithub] = useState<string>(profile.contacts.github || '')
-    const [instagram, setInstagram] = useState<string>(profile.contacts.instagram || '')
-    const [mainLink, setMainLink] = useState<string>(profile.contacts.mainLink || '')
-    const [twitter, setTwitter] = useState<string>(profile.contacts.twitter || '')
-    const [vk, setVk] = useState<string>(profile.contacts.vk || '')
-    const [website, setWebsite] = useState<string>(profile.contacts.website || '')
-    const [youtube, setYoutube] = useState<string>(profile.contacts.youtube || '')
-
-    const dataForUpdate = {
-        "aboutMe": 'string',
-        userId: props.myId ? props.myId : 0,
-        lookingForAJob: false,
-        lookingForAJobDescription: false,
-        fullName: profile.fullName,
-        "photos": photos ? photos : null,
-        contacts: {
-            github: github,
-            vk: vk,
-            facebook: facebook,
-            instagram: instagram,
-            twitter: twitter,
-            website: website,
-            youtube: youtube,
-            mainLink: mainLink,
-        }
-    }
-
-    const onClickHandler = () =>{
-        dispatch(updateProfileTС(dataForUpdate))
-        props.toggle()
-    }
-
     return (
-        <div>
-        <div style={{display: 'flex', flexDirection: 'column', margin: '10px'}}>
-            facebook: <input value={facebook} placeholder={'facebook'} onChange={(e)=>{setFacebook(e.currentTarget.value)}}/>
-            github: <input value={github} onChange={(e)=>{setGithub(e.currentTarget.value)}}/>
-            instagram: <input value={instagram} onChange={(e)=>{setInstagram(e.currentTarget.value)}}/>
-            mainLink: <input value={mainLink} onChange={(e)=>{setMainLink(e.currentTarget.value)}}/>
-            twitter: <input value={twitter} onChange={(e)=>{setTwitter(e.currentTarget.value)}}/>
-            vk: <input value={vk} onChange={(e)=>{setVk(e.currentTarget.value)}}/>
-            website: <input value={website} onChange={(e)=>{setWebsite(e.currentTarget.value)}}/>
-            youtube: <input value={youtube} onChange={(e)=>{setYoutube(e.currentTarget.value)}}/>
-        </div>
-            <button onClick={onClickHandler}>Cохранить изменения. </button>
-        </div>
-    );
-};
+        <form onSubmit={formik.handleSubmit}>
+            <div style={{display: 'flex', flexDirection: 'column', width: '300px'}}>
+                <b>facebook: </b><input
+                {...formik.getFieldProps("facebook")}
+                onChange={formik.handleChange}
+                value={formik.values.facebook}
+            />
+                {formik.errors.facebook ? <div>{formik.errors.facebook}</div> : null}
+                <b>github: </b><input
+                {...formik.getFieldProps("github")}
+                onChange={formik.handleChange}
+                value={formik.values.github}
+            />
+                {formik.errors.github ? <div>{formik.errors.github}</div> : null}
+                <b>instagram: </b><input
+                {...formik.getFieldProps("instagram")}
+                onChange={formik.handleChange}
+                value={formik.values.instagram}
+            />
+                <b>mainLink: </b><input
+                {...formik.getFieldProps("mainLink")}
+                onChange={formik.handleChange}
+                value={formik.values.mainLink}
+            />
+                <b>website: </b><input
+                {...formik.getFieldProps("website")}
+                onChange={formik.handleChange}
+                value={formik.values.website}
+            />
+                <b>twitter: </b><input
+                {...formik.getFieldProps("twitter")}
+                onChange={formik.handleChange}
+                value={formik.values.twitter}
+            />
+                <b>vk: </b><input
+                {...formik.getFieldProps("vk")}
+                onChange={formik.handleChange}
+                value={formik.values.vk}
+            />
+                <b>youtube: </b><input
+                {...formik.getFieldProps("youtube")}
+                onChange={formik.handleChange}
+                value={formik.values.youtube}
+            />
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    )
 
-export default UpdateProfile;
+
+}

@@ -16,7 +16,8 @@ it('length of new state should be 5',()=>{
         ],
         profile: {}as ProfileType,
         status: 'Place for status',
-        error: null
+        error: null,
+        errorUpdateUserData: null
     }
 
     let newState = profileReducer(startState, action)
@@ -37,7 +38,8 @@ it('new message of new porst should be correct',()=>{
         ],
         profile: {}as ProfileType,
         status: 'Place for status',
-        error: null
+        error: null,
+        errorUpdateUserData: null
     }
 
     let newState = profileReducer(startState, action)
@@ -58,7 +60,8 @@ it('post should be deleted',()=>{
         ],
         profile: {}as ProfileType,
         status: 'Place for status',
-        error: null
+        error: null,
+        errorUpdateUserData: null
     }
 
     let newState = profileReducer(startState, action)
